@@ -1,0 +1,53 @@
+{
+  "name": "swimming_generator",
+  "version": "1.0.0",
+  "description": "Customised swimming training generator",
+  "main": "index.js",
+  "scripts": {
+    "develop": "webpack serve --open --env mode=development",
+    "production": "webpack serve --open --env mode=production",
+    "format": "prettier --write .",
+    "build": "webpack --config webpack.config.js --env mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masanpoc/swimming.git"
+  },
+  "keywords": [
+    "swimming",
+    "training",
+    "generator",
+    "redux",
+    "react"
+  ],
+  "author": "Mario Sancho-Cirer Poczatek",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/masanpoc/swimming/issues"
+  },
+  "homepage": "https://github.com/masanpoc/swimming#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/eslint-parser": "^7.14.7",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "autoprefixer": "^10.2.6",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
+    "eslint": "^7.29.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-webpack-plugin": "^2.5.4",
+    "mini-css-extract-plugin": "^2.0.0",
+    "postcss-loader": "^6.1.0",
+    "prettier": "2.3.2",
+    "terser-webpack-plugin": "^5.1.4",
+    "webpack": "^5.41.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
