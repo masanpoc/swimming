@@ -1,10 +1,11 @@
 const path = require("path");
-const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const ESLintPlugin = require('eslint-webpack-plugin');
+const ESLintPlugin = require("eslint-webpack-plugin");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
-module.exports = env => {
+module.exports = (env) => {
     return {
         mode: env.mode,
         entry: path.resolve(__dirname, "src", "index.js"),
@@ -17,8 +18,9 @@ module.exports = env => {
             historyApiFallback: true,
             clientLogLevel: "silent",
             port: 9000,
-            hot: true
+            hot: true,
         },
+        devtool: "inline-source-map",
         module: {
             rules: [
                 {
@@ -38,37 +40,48 @@ module.exports = env => {
                                     ],
                                     "@babel/preset-react",
                                 ],
+                                plugins: ["@babel/plugin-transform-runtime"],
                             },
                         },
-
                     ],
                 },
                 {
                     test: /\.css$/i,
-                    include: path.resolve(__dirname, 'src'),
+                    include: path.resolve(__dirname, "src"),
                     exclude: /node_modules/,
                     use: [
                         {
                             loader: MiniCssExtractPlugin.loader,
                         },
                         {
-                            loader: 'css-loader',
+                            loader: "css-loader",
                             options: {
-                                importLoaders: 1
-                            }
+                                importLoaders: 1,
+                            },
                         },
-                        'postcss-loader'
-                    ]
-                }
+                        "postcss-loader",
+                    ],
+                },
+                {
+                    test: /\.(png|jpg|jpeg|svg|gif)?$/,
+                    type: "asset/resource",
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                    type: "asset/resource",
+                },
             ],
         },
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new MiniCssExtractPlugin({
-                filename: '[name].bundle.css',
-                chunkFilename: '[id].css'
+                filename: "[name].bundle.css",
+                chunkFilename: "[id].css",
             }),
-            new ESLintPlugin()
+            new ESLintPlugin(),
+            new HtmlWebPackPlugin({
+                template: 'src/index.html'
+            }),
         ],
         optimization: {
             minimizer: [
@@ -77,5 +90,5 @@ module.exports = env => {
                 }),
             ],
         },
-    }
+    };
 };
