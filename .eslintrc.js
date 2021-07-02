@@ -13,7 +13,9 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: {},
+  rules: {
+    "no-unused-vars": "warn",
+  },
   settings: {
     react: {
       version: "detect",
