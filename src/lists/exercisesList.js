@@ -1,4 +1,3 @@
-// make a constructor later with unique id
 import { v4 as uuidv4 } from 'uuid';
 
 const exercisesList = [

@@ -7,7 +7,7 @@ export const exercisesReducer = createSlice({
     reducers: {
         filterByLevel(state, action) {
             const {level}=action.payload;
-            return state.filter(ex=>ex.level>level)
+            return state.filter(ex=>ex.level<=level)
         },
         filterByStroke(state, action) {
             const {strokesTargeted} = action.payload;
