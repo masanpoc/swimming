@@ -107,7 +107,7 @@ const exercisesList = [
         stroke: 'freestyle',
         block: ['technique'],
         muscle: ['arms', 'back', 'pecs'],
-        material: ['pull-buoy']
+        material: ['pullbuoy']
     },
     {
         id: uuidv4(),
@@ -269,7 +269,7 @@ const exercisesList = [
         stroke: 'backstroke',
         block: ['technique'],
         muscle: ['arms', 'back', 'abs'],
-        material: []
+        material: ['pullbuoy']
     },
     {
         id: uuidv4(),
@@ -296,7 +296,7 @@ const exercisesList = [
         stroke: 'backstroke',
         block: ['technique'],
         muscle: ['arms', 'back'],
-        material: []
+        material: ['pullbuoy']
     },
     {
         id: uuidv4(),
@@ -323,7 +323,7 @@ const exercisesList = [
         stroke: 'backstroke',
         block: ['technique'],
         muscle: ['arms', 'back', 'abs'],
-        material: []
+        material: ['pullbuoy']
     },
     {
         id: uuidv4(),
