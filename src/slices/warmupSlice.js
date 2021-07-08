@@ -48,7 +48,10 @@ export const warmupReducer = createSlice({
                         exs_material.splice(index,1);
                         filteredExercises.splice(index2,1);
                         // push to warmup
-                        warmupExercises.push(selected);
+                        if(selected){
+                            warmupExercises.push(selected);
+                        }
+                        
                         pendingExercises--;
                         counter++;
                     }
@@ -67,7 +70,10 @@ export const warmupReducer = createSlice({
                         let index2 = filteredExercises.findIndex(el=>el.name==selected.name);
                         exs_muscle.splice(index,1);
                         filteredExercises.splice(index2,1);
-                        warmupExercises.push(selected);
+                        if(selected){
+                            warmupExercises.push(selected);
+                        }
+                        
                         pendingExercises--;
                     }
                 }
@@ -82,7 +88,10 @@ export const warmupReducer = createSlice({
                 let selected = exs_left[Math.floor(Math.random()*exs_left.length)]
                 let index = exs_left.indexOf(selected);
                 exs_left.splice(index,1);
-                warmupExercises.push(selected);
+                if(selected){
+                    warmupExercises.push(selected);       
+                }
+               
             }
 
             return shuffle(warmupExercises)

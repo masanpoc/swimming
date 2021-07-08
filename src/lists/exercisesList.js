@@ -469,6 +469,70 @@ const exercisesList = [
         muscle: ['legs'],
         material: ['kickboard']
     },
+    {
+        id: uuidv4(),
+        name: 'Bow&Arrow freestyle with fins, 6 kicks',
+        level: 4,
+        stroke: 'freestyle',
+        block: ['main', 'technique'],
+        muscle: ['legs', 'arms', 'back', 'abs'],
+        material: ['fins']
+    },
+    {
+        id: uuidv4(),
+        name: 'Kick switch - no arms',
+        level: 3,
+        stroke: 'freestyle',
+        block: ['technique'],
+        muscle: ['legs'],
+        material: []
+    },
+    {
+        id: uuidv4(),
+        name: 'Singapore Freestyle (one stroke, one dog arm)',
+        level: 4,
+        stroke: 'freestyle',
+        block: ['warmup', 'technique'],
+        muscle: ['arms', 'back'],
+        material: ['fins, snorkel']
+    },
+    {
+        id: uuidv4(),
+        name: 'Freestyle with kickboard between legs, touching kickboard',
+        level: 1,
+        stroke: 'freestyle',
+        block: ['warmup', 'cooldown', 'technique'],
+        muscle: ['arms', 'back'],
+        material: ['kickboard']
+    },
+    {
+        id: uuidv4(),
+        name: 'Freestyle with pull-buoy between ankles',
+        level: 2,
+        stroke: 'freestyle',
+        block: ['warmup', 'technique'],
+        muscle: ['abs', 'arms', 'back'],
+        material: ['pullbuoy']
+    },
+    {
+        id: uuidv4(),
+        name: 'Freestyle with hand extension/sliding 3seconds',
+        level: 2,
+        stroke: 'freestyle',
+        block: ['warmup', 'technique', 'cooldown'],
+        muscle: ['arms', 'back'],
+        material: []
+    },
+    {
+        id: uuidv4(),
+        name: 'Finger drags surface',
+        level: 3,
+        stroke: 'freestyle',
+        block: ['warmup', 'cooldown', 'technique'],
+        muscle: ['arms', 'back', 'abs'],
+        material: []
+    },
+
 ]
 
 export default exercisesList

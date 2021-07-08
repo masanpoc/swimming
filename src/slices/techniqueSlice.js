@@ -42,7 +42,10 @@ export const techniqueReducer = createSlice({
                     exs_material.splice(index,1);
                     filteredExercises.splice(index2,1);
                     // push to technique
-                    techniqueExercises.push(selected);
+                    if(selected){
+                        techniqueExercises.push(selected);
+                    }
+                    
                     pendingExercises--;
                     counter++;
                     }
@@ -61,7 +64,10 @@ export const techniqueReducer = createSlice({
                         let index2 = filteredExercises.findIndex(el=>el.name==selected.name);
                         exs_muscle.splice(index,1);
                         filteredExercises.splice(index2,1);
-                        techniqueExercises.push(selected);
+                        if(selected){
+                            techniqueExercises.push(selected);
+                        }
+                        
                         pendingExercises--;
                     }
                 }
@@ -76,7 +82,10 @@ export const techniqueReducer = createSlice({
                 let selected = exs_left[Math.floor(Math.random()*exs_left.length)]
                 let index = exs_left.indexOf(selected);
                 exs_left.splice(index,1);
-                techniqueExercises.push(selected);
+                if(selected){
+                    techniqueExercises.push(selected);   
+                }
+                
             }
 
             return shuffle(techniqueExercises)
