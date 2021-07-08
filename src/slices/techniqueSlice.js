@@ -1,6 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 import randomIntFromInterval from '../functions/randomIntFromInterval';
 import shuffle from '../functions/shuffle'
+// import * as _ from 'ramda'
+
 
 export const techniqueReducer = createSlice({
     name: 'technique',
@@ -15,6 +17,9 @@ export const techniqueReducer = createSlice({
             const numberExercises = randomIntFromInterval(min,max);
             let pendingExercises = numberExercises;
             filteredExercises=filteredExercises.filter(ex=>ex.block.includes('technique'))
+            // // remove exercises that are already in warmup --> use _.difference function
+            // filteredExercises=_.difference(filteredExercises, warmup);
+            // console.log(filteredExercises);
             // logic for deterministic+random selection:
             // main/technique => use all types of material: beginner's materials and advanced equipment
             if(material.length>0){
@@ -31,7 +36,7 @@ export const techniqueReducer = createSlice({
                     let arrayToSelectFrom = exs_material.filter(ex=>ex.material.includes(techniqueTool));
                     if(arrayToSelectFrom.length>0 && counter<3){
                     let selected = arrayToSelectFrom[Math.floor(Math.random()*arrayToSelectFrom.length)]
-                    let index = arrayToSelectFrom.indexOf(selected);
+                    let index = exs_material.indexOf(selected);
                     // make sure it is not repeated in the block by removing the exercise from filteredExercises, and from the exs_material list
                     let index2 = filteredExercises.findIndex(el=>el.name==selected.name);
                     exs_material.splice(index,1);

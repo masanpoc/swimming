@@ -15,5 +15,4 @@ export default configureStore({
         cooldown: cooldownReducer,
         training: trainingReducer
     }
-
 })
