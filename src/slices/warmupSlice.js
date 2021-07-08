@@ -14,6 +14,7 @@ export const warmupReducer = createSlice({
             const min = 2;
             const numberExercises = randomIntFromInterval(min,max);
             let pendingExercises = numberExercises;
+            // console.log(filteredExercises);
             filteredExercises=filteredExercises.filter(ex=>ex.block.includes('warmup'))
             // logic for deterministic+random selection:
             // warmup => do not use advanced equipment
@@ -41,7 +42,7 @@ export const warmupReducer = createSlice({
                     let arrayToSelectFrom = exs_material.filter(ex=>ex.material.includes(warmupTool));
                     if(arrayToSelectFrom.length>0 && counter<1){
                         let selected = arrayToSelectFrom[Math.floor(Math.random()*arrayToSelectFrom.length)]
-                        let index = arrayToSelectFrom.indexOf(selected);
+                        let index = exs_material.indexOf(selected);
                         // make sure it is not repeated in the block by removing the exercise from filteredExercises, and from the exs_material list (not really happening as we dont have any exercise with both pullbuoy and kickboard)
                         let index2 = filteredExercises.findIndex(el=>el.name==selected.name);
                         exs_material.splice(index,1);

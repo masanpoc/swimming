@@ -41,7 +41,7 @@ export const cooldownReducer = createSlice({
                         let arrayToSelectFrom = exs_material.filter(ex=>ex.material.includes(cooldownTool));
                         if(arrayToSelectFrom.length>0){
                         let selected = arrayToSelectFrom[Math.floor(Math.random()*arrayToSelectFrom.length)]
-                        let index = arrayToSelectFrom.indexOf(selected);
+                        let index = exs_material.indexOf(selected);
                         // make sure it is not repeated in the block by removing the exercise from filteredExercises, and from the exs_material list (not really happening as we dont have any exercise with both pullbuoy and kickboard)
                         let index2 = filteredExercises.findIndex(el=>el.name==selected.name);
                         exs_material.splice(index,1);
