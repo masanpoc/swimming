@@ -47,7 +47,10 @@ export const cooldownReducer = createSlice({
                         exs_material.splice(index,1);
                         filteredExercises.splice(index2,1);
                         // push to cooldown
-                        cooldownExercises.push(selected);
+                        if(selected){
+                            cooldownExercises.push(selected);
+                        }
+                        
                         pendingExercises--;
                         counter++;
                         }
@@ -82,7 +85,10 @@ export const cooldownReducer = createSlice({
                 let selected = exs_left[Math.floor(Math.random()*exs_left.length)]
                 let index = exs_left.indexOf(selected);
                 exs_left.splice(index,1);
-                cooldownExercises.push(selected);
+                if(selected){
+                    cooldownExercises.push(selected);
+                }
+                
             }
 
             return shuffle(cooldownExercises)
