@@ -18,9 +18,9 @@ const Input = () => {
 
   function thunkActionCreator() {
     return (dispatch, getState) => {
-      console.log('middleware working')
+      // console.log('middleware working')
       let filteredList = list;
-      console.log(filteredList);
+      // console.log(filteredList);
       dispatch(copy_filter_select_warmupExercises({
         filteredExercises: filteredList, 
         material: ['kickboard', 'snorkel', 'paddles', 'fins', 'pullbuoy'], 
@@ -29,7 +29,8 @@ const Input = () => {
       const warmup = getState().warmup;
       // remove exercises that are already in warmup --> use _.difference function
       filteredList=_.difference(filteredList, warmup);
-      console.log(filteredList);
+      // check if we have removed the generated warmup exercises from the list
+      // console.log(filteredList);
       dispatch(copy_filter_select_techniqueExercises({
         filteredExercises: filteredList, 
         material: ['kickboard', 'snorkel', 'paddles', 'fins', 'pullbuoy'],
