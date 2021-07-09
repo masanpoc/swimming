@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { filterByLevel, filterByStroke, filterByMaterial } from "../../slices/exercisesSlice";
 import { copy_filter_select_warmupExercises } from '../../slices/warmupSlice';
@@ -11,10 +11,7 @@ import * as _ from 'ramda'
 const Input = () => {
   const list = useSelector(state=>state.exercises)
   const dispatch = useDispatch();
-  const warmup = useSelector(state=>state.warmup)
-  const technique = useSelector(state=>state.technique);
-  const main = useSelector(state=>state.main)
-  const cooldown = useSelector(state=>state.cooldown)
+  const [level, setLevel] = useState(1);
 
   function thunkActionCreator() {
     return (dispatch, getState) => {
@@ -76,47 +73,80 @@ const Input = () => {
 
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(level);
+  }
+
   return <div>
-    {
+    {/* {
       list.map(ex=>{
         return (
           <h5 key={ex.id}>name: {ex.name} level:{ex.level} materials:{ex.material}</h5>
         )
       })
-    }
+    } */}
+    
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="levels">
+        <h3>Choose a level:</h3>
+      </label>
+      <select name="levels" id="levels" onChange={(e)=>setLevel(e.target.value)}>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <br/>
+
+      <h3>You will be swimming:</h3>
+      <div>
+        <input type="checkbox" id="freestyle" name="freestyle" value="freestyle" onChange={(e)=>{}}/>
+        <label htmlFor="freestyle">Freestyle</label><br/>
+        <input type="checkbox" id="backstroke" name="backstroke" value="backstroke" onChange={(e)=>{}}/>
+        <label htmlFor="backstroke">Backstroke</label><br/>
+        <input type="checkbox" id="breaststroke" name="breaststroke" value="breaststroke" onChange={(e)=>{}}/>
+        <label htmlFor="breaststroke">Breaststroke</label><br/>
+        <input type="checkbox" id="butterfly" name="butterfly" value="butterfly" onChange={(e)=>{}}/>
+        <label htmlFor="butterfly">Butterfly</label><br/>
+      </div>
+
+      <h3>You are using:</h3>
+      <div>
+        <input type="checkbox" id="kickboard" name="kickboard" value="kickboard"/>
+        <label htmlFor="kickboard">Kickboard</label><br/>
+        <input type="checkbox" id="pullbuoy" name="pullbuoy" value="pullbuoy"/>
+        <label htmlFor="pullbuoy">Pull-buoy</label><br/>
+        <input type="checkbox" id="fins" name="fins" value="fins"/>
+        <label htmlFor="fins">Fins</label><br/>
+        <input type="checkbox" id="paddles" name="paddles" value="paddles"/>
+        <label htmlFor="paddles">Paddles</label><br/>
+        <input type="checkbox" id="snorkel" name="snorkel" value="snorkel"/>
+        <label htmlFor="snorkel">Snorkel</label><br/>
+      </div>
+
+      <h3>Muscles you want to focus on:</h3>
+      <div>
+        <input type="checkbox" id="arms" name="arms" value="arms"/>
+        <label htmlFor="arms">Arms</label><br/>
+        <input type="checkbox" id="pecs" name="pecs" value="pecs"/>
+        <label htmlFor="pecs">Pecs</label><br/>
+        <input type="checkbox" id="abs" name="abs" value="abs"/>
+        <label htmlFor="abs">Abs</label><br/>
+        <input type="checkbox" id="back" name="back" value="back"/>
+        <label htmlFor="back">Back</label><br/>
+        <input type="checkbox" id="legs" name="legs" value="legs"/>
+        <label htmlFor="legs">Legs</label><br/>
+      </div>
+
+      <input type="submit" value="Submit"/>
+    </form>
+
     <button onClick={filterExercises}>Add</button>
-    <h4>Warmup</h4>
-    {
-      warmup.map(ex=>{
-        return (
-          <h5 key={ex.id}>name: {ex.name} level:{ex.level} materials:{ex.material}</h5>
-        )
-      })
-    }
-    <h4>Technique</h4>
-    {
-      technique.map(ex=>{
-        return (
-          <h5 key={ex.id}>name: {ex.name} level:{ex.level} materials:{ex.material}</h5>
-        )
-      })
-    }
-    <h4>Main</h4>
-    {
-      main.map(ex=>{
-        return (
-          <h5 key={ex.id}>name: {ex.name} level:{ex.level} materials:{ex.material}</h5>
-        )
-      })
-    }
-    <h4>Cooldown</h4>
-    {
-      cooldown.map(ex=>{
-        return (
-          <h5 key={ex.id}>name: {ex.name} level:{ex.level} materials:{ex.material}</h5>
-        )
-      })
-    }
+    
+    
+    
   </div>;
 };
 

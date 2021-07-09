@@ -6,7 +6,7 @@ import store from '../store';
 
 const App = () => {
   // generated will be a state.generate value in Store, not a Hook
-  const [generated] = useState(false)
+  // const [generated] = useState(false)
 
   return (
     <Provider store={store}>
@@ -19,11 +19,14 @@ const App = () => {
         Set your own options to generate a customised training
       </h2>
       <p className="my-3 px-2 mx-2 w-11/12">options</p>
-      {
+      {/* {
         generated
         ? <Training />
         : <Input />
-      }
+      } */}
+      
+      <Input />
+      <Training />
     </div>
     </Provider>
   );
