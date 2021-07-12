@@ -5,7 +5,7 @@ const Main = () => {
   const main = useSelector(state=>state.main)
 
   return <div>
-    <h4>Main</h4>
+    <h4>Main Block</h4>
     {
       main.map(ex=>{
         return (
