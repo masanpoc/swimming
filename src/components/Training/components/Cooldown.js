@@ -7,7 +7,7 @@ const Cooldown = () => {
   return <div>
   
   
-  <h4>Cooldown</h4>
+  <h4>Cool down</h4>
     {
       cooldown.map(ex=>{
         return (

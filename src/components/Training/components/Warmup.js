@@ -5,7 +5,7 @@ const Warmup = () => {
   const warmup = useSelector(state=>state.warmup)
 
   return <div>
-    <h4>Warmup</h4>
+    <h4>Warm up</h4>
     {
       warmup.map(ex=>{
         return (

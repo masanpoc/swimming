@@ -30,6 +30,24 @@ const exercisesList = [
     },
     {
         id: uuidv4(),
+        name: 'medley with fins',
+        level: 4,
+        stroke: 'all',
+        block: ['main', 'warmup'],
+        muscle: ['legs', 'abs', 'arms', 'pecs', 'back'],
+        material: ['fins']
+    },
+    {
+        id: uuidv4(),
+        name: 'medley kick',
+        level: 3,
+        stroke: 'all',
+        block: ['main', 'warmup', 'technique'],
+        muscle: ['legs', 'abs', 'arms', 'pecs', 'back'],
+        material: []
+    },
+    {
+        id: uuidv4(),
         name: 'breaststroke with two kicks',
         level: 2,
         stroke: 'breaststroke',
