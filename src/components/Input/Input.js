@@ -117,18 +117,35 @@ const Input = () => {
     
     <form onSubmit={handleSubmit} id='training-form'>
       <label htmlFor="levels">
-        <h3>Choose a level:</h3>
+        <h3>Your level:</h3>
       </label>
-      <select name="levels" id="levels" onChange={(e)=>setLevel(e.target.value)}>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
+      <ul>
+        <li>
+          <input type="radio" id="1" name="1" value="1" onChange={(e)=>setLevel(e.target.value)}/>
+          <label htmlFor="1">1</label>
+        </li>
+        <li>
+          <input type="radio" id="2" name="2" value="2" onChange={(e)=>setLevel(e.target.value)}/>
+          <label htmlFor="2">2</label>
+        </li>
+        <li>
+          <input type="radio" id="3" name="3" value="3" onChange={(e)=>setLevel(e.target.value)}/>
+          <label htmlFor="3">3</label>
+        </li>
+        <li>
+          <input type="radio" id="4" name="4" value="4" onChange={(e)=>setLevel(e.target.value)}/>
+          <label htmlFor="4">4</label>
+        </li>
+        <li>
+          <input type="radio" id="5" name="5" value="5" onChange={(e)=>setLevel(e.target.value)}/>
+          <label htmlFor="5">5</label>
+        </li>
+      </ul>
       <br/>
-
-      <h3>You will be swimming:</h3>
+      <div>
+        Here will go meters and pace range sliders
+      </div>
+      <h3>Strokes for this workout:</h3>
       <div>
         <input type="checkbox" id="freestyle" name="freestyle" value="freestyle" onChange={handleStrokes}/>
         <label htmlFor="freestyle">Freestyle</label><br/>
@@ -140,7 +157,7 @@ const Input = () => {
         <label htmlFor="butterfly">Butterfly</label><br/>
       </div>
 
-      <h3>You are using:</h3>
+      <h3>Materials you are using: (toggle tokens)</h3>
       <div>
         <input type="checkbox" id="kickboard" name="kickboard" value="kickboard" onChange={handleMaterials}/>
         <label htmlFor="kickboard">Kickboard</label><br/>
@@ -154,7 +171,7 @@ const Input = () => {
         <label htmlFor="snorkel">Snorkel</label><br/>
       </div>
 
-      <h3>Muscles you want to focus on:</h3>
+      <h3>Muscles you want to focus on: (toggle tokens)</h3>
       <div>
         {/* <input type="checkbox" id="all" name="all" value="all" onChange={handleMuscles}/>
         <label htmlFor="all">All</label><br/> */}
@@ -170,7 +187,7 @@ const Input = () => {
         <label htmlFor="legs">Legs</label><br/>
       </div>
 
-      <input type="submit" value="Ready!"/>
+      <input type="submit" value="Generate your workout"/>
       
     </form>
 
