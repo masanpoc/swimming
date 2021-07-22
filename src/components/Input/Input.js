@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   filterByLevel,
   filterByStroke,
@@ -11,7 +11,6 @@ import { copy_filter_select_techniqueExercises } from "../../slices/techniqueSli
 import { copy_filter_select_mainExercises } from "../../slices/mainSlice";
 import { copy_filter_select_cooldownExercises } from "../../slices/cooldownSlice";
 import exercisesList from "../../lists/exercisesList";
-import "./input.css";
 import * as _ from "ramda";
 
 function formatPace(duration) {
@@ -149,10 +148,10 @@ const Input = () => {
       <form
         onSubmit={handleSubmit}
         id="training-form"
-        className="my-52 mx-12 border-2 flex flex-col items-start justify-center border-red-500"
+        className="my-52 mx-12 border-2 flex flex-col items-start justify-center space-y-7 border-red-500"
       >
-        <div className="flex flex-col border-2 border-green-800">
-          <h3 className="text-left">Your level:</h3>
+        <div className="flex flex-col space-y-4 border-2 border-green-800 w-full">
+          <h3 className="text-left bg-yellow-500">Your level:</h3>
           <ul className="flex flex-row h-8">
             <li className='relative w-9'>
               <input
@@ -212,27 +211,40 @@ const Input = () => {
           </ul>
         </div>
         
-        <div className="meterContainer flex flex-col relative bg-yellow-400">
-          <h3>Set your meters goal:</h3>
-          <div>
-          <input
-            type="range"
-            min="500"
-            max="5000"
-            step="100"
-            value={meters}
-            id="meterSlider"
-            className="meterSlider"
-            onChange={(e) => setMeters(e.target.value)}
-          />
-          {meters}
+        <div className="flex flex-col space-y-11 w-full  bg-yellow-400">
+          <h3 className='text-left bg-red-200'>Set your meters goal:</h3>
+          <div className='relative bg-yellow-200 w-full'>
+            <input
+              type="range"
+              min="500"
+              max="4000"
+              step="100"
+              value={meters}
+              id="meterSlider"
+              name='meters'
+              className="w-full "
+              style={
+                {
+                  "appearance": "none"
+                }
+              }
+              onChange={(e) => setMeters(e.target.value)}
+            />
+            <output htmlFor='meters' 
+            className={`bg-green-50 w-3/12 text-sm px-2 py-1 rounded-md absolute bottom-6`}
+            style={{"left": `${_.divide(_.subtract(meters, 407.89), 36.84)}%`, "transform": "translate(-50%, 0)"}}
+            >
+              {meters} m
+            </output>
+              {/* {_.divide(_.subtract(meters, 407.89), 36.84)} */}
+            
           </div>
           
-          {/* <span className="unit absolute" data-meters={meters}></span> */}
-
         </div>
-        <div className="paceContainer bg-yellow-600">
-          <h3>Set your freestyle pace:</h3>
+        <div className="flex flex-col space-y-11 w-full bg-yellow-600">
+          <h3 className='text-left bg-red-200'>Set your 100m freestyle pace:</h3>
+          <div className='relative bg-yellow-200 w-full'>
+            
           <input
             type="range"
             min="70"
@@ -240,13 +252,26 @@ const Input = () => {
             step="5"
             value={pace}
             id="paceSlider"
-            className="paceSlider"
+            name='pace'
+            className="w-full "
+              style={
+                {
+                  "appearance": "none"
+                }
+              }
             onChange={(e) => setPace(e.target.value)}
           />
-
-          {paceTime}
+          <output htmlFor='pace' 
+            className={`bg-green-50 w-3/12 text-sm px-2 py-1 rounded-md absolute bottom-6`}            
+            style={{"left": `${_.divide(_.subtract(pace, 67.8947),  0.8421)}%`, "transform": "translate(-50%, 0)"}}
+            >
+               {paceTime}
+            </output>
+         
+          
+          </div>
         </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col bg-yellow-600'>
           <h3>Strokes for this workout:</h3>
           <ul className='flex flex-col pl-4 items-start'>
             <li>
@@ -296,7 +321,7 @@ const Input = () => {
           </ul>
         </div>
 
-        <div className='flex flex-col items-start'>
+        <div className='flex flex-col items-start bg-yellow-600'>
           <h3>Materials you are using:</h3>
           <ul className="grid grid-cols-3 border-2 border-green-600">
             <li>
@@ -357,7 +382,7 @@ const Input = () => {
           </ul>
         </div>
 
-        <div>
+        <div className='bg-yellow-600'>
           <h3>Muscles you want to focus on:</h3>
           <ul className="grid grid-cols-3 border-2 border-green-600">
             <li>
