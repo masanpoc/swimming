@@ -11,6 +11,6 @@ body {
 
 @layer base {
   li {
-    @apply border-2 border-black flex flex-row items-center
+    @apply flex flex-row items-center
   }
 }
