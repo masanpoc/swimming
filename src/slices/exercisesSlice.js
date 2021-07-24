@@ -64,7 +64,7 @@ export const exercisesReducer = createSlice({
       const { reset } = action.payload;
       let newState = state.slice();
       newState = _.union(newState, reset);
-      console.log(newState, "reset");
+      // console.log(newState, "reset");
       return newState;
     },
   },
