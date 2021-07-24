@@ -29,6 +29,7 @@ const Input = () => {
   const [meters, setMeters] = useState(2200);
   const [pace, setPace] = useState(100);
   const [selected, setSelected] = useState({1: false, 2: false, 3: true, 4: false, 5: false});
+  const [showMessage, setShowMessage] = useState(false);
   let paceTime = formatPace(pace);
 
   useEffect(() => {
@@ -49,7 +50,9 @@ const Input = () => {
         level,
         strokes,
         materials,
-        muscles
+        muscles,
+        meters,
+        pace
       );
       dispatch(filterByLevel({ level }));
       dispatch(filterByStroke({ strokesTargeted: strokes }));
@@ -106,12 +109,23 @@ const Input = () => {
   function handleSubmit(e) {
     // alert if any fields are not as expected
     e.preventDefault();
-    filterExercises();
+    if(strokes.length<1){
+      setShowMessage(true)
+    } else {
+      setShowMessage(false)
+      filterExercises();
+    }
   }
 
   function resetForm() {
     // document.getElementById('training-form').reset();
-    // document.querySelectorAll('input[type=checkbox]').forEach( el => el.checked = false );
+    setLevel(3);
+    setMeters(2200);
+    setPace(100);
+    setStrokes(['freestyle']);
+    setMaterials(['kickboard', 'pullbuoy']);
+    setMuscles([]);
+    setShowMessage(false);
     dispatch(resetList({ reset: exercisesList }));
   }
 
@@ -288,6 +302,7 @@ const Input = () => {
                 style={{transform: 'scale(1.2)'}}
                 checked={strokes.includes('freestyle')}
                 onChange={handleStrokes}
+                
               />
               <label htmlFor="freestyle" className='text-left w-full'>Freestyle</label>
               
@@ -299,7 +314,9 @@ const Input = () => {
                 name="backstroke"
                 value="backstroke"
                 style={{transform: 'scale(1.2)'}}
+                checked={strokes.includes('backstroke')}
                 onChange={handleStrokes}
+                
               />
               <label htmlFor="backstroke" className='text-left w-full'>Backstroke</label>
               
@@ -311,6 +328,7 @@ const Input = () => {
                 name="breaststroke"
                 value="breaststroke"
                 style={{transform: 'scale(1.2)'}}
+                checked={strokes.includes('breaststroke')}
                 onChange={handleStrokes}
               />
               <label htmlFor="breaststroke" className='text-left w-full'>Breaststroke</label>
@@ -323,6 +341,7 @@ const Input = () => {
                 name="butterfly"
                 value="butterfly"
                 style={{transform: 'scale(1.2)'}}
+                checked={strokes.includes('butterfly')}
                 onChange={handleStrokes}
               />
               <label htmlFor="butterfly" className='text-left w-full'>Butterfly</label>
@@ -367,6 +386,7 @@ const Input = () => {
                 name="fins"
                 value="fins"
                 className='opacity-0'
+                checked={materials.includes('fins')}
                 onChange={handleMaterials}
               />
               <label  className='absolute flex flex-col justify-center text-sm inset-0'  htmlFor="fins">Fins</label>
@@ -379,6 +399,7 @@ const Input = () => {
                 name="paddles"
                 value="paddles"
                 className='opacity-0'
+                checked={materials.includes('paddles')}
                 onChange={handleMaterials}
               />
               <label className='absolute flex flex-col justify-center text-sm inset-0'  htmlFor="paddles">Paddles</label>
@@ -391,6 +412,7 @@ const Input = () => {
                 name="snorkel"
                 value="snorkel"
                 className='opacity-0'
+                checked={materials.includes('snorkel')}
                 onChange={handleMaterials}
               />
               <label className='absolute flex flex-col justify-center text-sm inset-0'  htmlFor="snorkel">Snorkel</label>
@@ -400,7 +422,7 @@ const Input = () => {
         </div>
 
         <div className='flex flex-col items-start space-y-4 w-full bg-yellow-600'>
-          <h3  className='text-left w-full bg-purple-400'>Muscles you want to focus on:</h3>
+          <h3  className='text-left w-full bg-purple-400'>Muscles targeted (optional)</h3>
           <ul className="grid grid-cols-toggle w-full h-16 gap-1 ">
             <li className={`relative rounded-3xl ${muscles.includes('arms') ? 'bg-blue-600' : 'bg-blue-100'}`}>
               <input
@@ -409,6 +431,7 @@ const Input = () => {
                 name="arms"
                 value="arms"
                 className='opacity-0'
+                checked={muscles.includes('arms')}
                 onChange={handleMuscles}
               />
               <label htmlFor="arms" className='absolute flex flex-col justify-center text-sm inset-0'>Arms</label>
@@ -421,6 +444,7 @@ const Input = () => {
                 name="pecs"
                 value="pecs"
                 className='opacity-0'
+                checked={muscles.includes('pecs')}
                 onChange={handleMuscles}
               />
               <label htmlFor="pecs" className='absolute flex flex-col justify-center text-sm inset-0'>Pecs</label>
@@ -433,6 +457,7 @@ const Input = () => {
                 name="abs"
                 value="abs"
                 className='opacity-0'
+                checked={muscles.includes('abs')}
                 onChange={handleMuscles}
               />
               <label htmlFor="abs" className='absolute flex flex-col justify-center text-sm inset-0'>Abs</label>
@@ -445,6 +470,7 @@ const Input = () => {
                 name="back"
                 value="back"
                 className='opacity-0'
+                checked={muscles.includes('back')}
                 onChange={handleMuscles}
               />
               <label htmlFor="back" className='absolute flex flex-col justify-center text-sm inset-0'>Back</label>
@@ -457,6 +483,7 @@ const Input = () => {
                 name="legs"
                 value="legs"
                 className='opacity-0'
+                checked={muscles.includes('legs')}
                 onChange={handleMuscles}
               />
               <label htmlFor="legs" className='absolute flex flex-col justify-center text-sm inset-0'>Legs</label>
@@ -471,7 +498,7 @@ const Input = () => {
           style={{"marginTop": "40px"}}
         />
       </form>
-
+      <h1 className={`${showMessage ? '' : 'hidden'}`}>Please select at least one stroke</h1>
       <button onClick={resetForm}>Reset Options</button>
     </div>
   );
