@@ -13,7 +13,7 @@ export const displayReducer = createSlice({
             const partsToDisplayHide = action.payload;
             let newState = state;
             newState = _.mergeRight(newState, partsToDisplayHide);
-            console.log(newState)
+            // console.log(newState)
             return newState
         }
     }

@@ -57,22 +57,22 @@ const Input = () => {
 
   function thunkActionCreator() {
     return (dispatch, getState) => {
-      console.log('middleware working')
-      console.log(
-        getState().exercises,
-        "before filters",
-        level,
-        strokes,
-        materials,
-        muscles,
-        meters,
-        pace
-      );
+      // console.log('middleware working')
+      // console.log(
+      //   getState().exercises,
+      //   "before filters",
+      //   level,
+      //   strokes,
+      //   materials,
+      //   muscles,
+      //   meters,
+      //   pace
+      // );
       dispatch(filterByLevel({ level }));
       dispatch(filterByStroke({ strokesTargeted: strokes }));
       dispatch(filterByMaterial({ material: materials }));
       let filteredList = getState().exercises;
-      console.log(filteredList, "after filters");
+      // console.log(filteredList, "after filters");
       dispatch(
         copy_filter_select_warmupExercises({
           filteredExercises: filteredList,
@@ -122,6 +122,7 @@ const Input = () => {
 
   function handleSubmit(e) {
     // alert if any fields are not as expected
+    // console.log(e);
     e.preventDefault();
     if(strokes.length<1){
       setShowMessage(true)
@@ -177,6 +178,7 @@ const Input = () => {
         onSubmit={handleSubmit}
         id="training-form"
         className={`my-52 mx-12 border-2 flex flex-col items-start justify-center space-y-7 border-red-500 ${display.form ? '' : 'hidden'}`}
+        role='form'
       >
         <div className="flex flex-col space-y-4 border-2 border-green-800 w-full">
           <h3 className="text-left bg-yellow-500">Your level:</h3>
@@ -323,7 +325,7 @@ const Input = () => {
           </ul>
         </div>
 
-        <input type="submit" value="Generate your workout" 
+        <input type="submit" value="Generate your workout"  data-testid="submit-button"
           className=' bg-green-500 rounded-md px-3 py-1'
         
           style={{"marginTop": "40px"}}
@@ -334,7 +336,7 @@ const Input = () => {
 
       <h1>{`${_.values(display)}`}</h1>
 
-      <div className={`${display.buttons ? '' : 'hidden'}`}>
+      <div className={`${display.buttons ? '' : 'hidden'}`} data-testid='buttons-wrapper'>
         <h2>You don&#39;t like your training ?</h2>
         <p>Keep your preferences and generate a new training or go back to the form and set new options</p>
         <div>
