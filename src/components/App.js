@@ -30,6 +30,7 @@ const App = () => {
 
         <Input />
         <Training />
+
         <footer>
           <h1>
             Swimming footer with links to gh, lnkdn, complete list of exercises
