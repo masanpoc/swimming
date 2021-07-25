@@ -122,6 +122,7 @@ const Input = () => {
 
   function handleSubmit(e) {
     // alert if any fields are not as expected
+    console.log(e);
     e.preventDefault();
     if(strokes.length<1){
       setShowMessage(true)
@@ -323,7 +324,7 @@ const Input = () => {
           </ul>
         </div>
 
-        <input type="submit" value="Generate your workout" 
+        <input type="submit" value="Generate your workout"  data-testid="submit-button"
           className=' bg-green-500 rounded-md px-3 py-1'
         
           style={{"marginTop": "40px"}}
