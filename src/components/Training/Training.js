@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const Training = () => {
   const display = useSelector((state) => state.display); 
   return (
-    <div className={`${display.training ? '' : 'hidden'}`}>
+    <div className={`${display.training ? '' : 'hidden'}`} data-testid='training' id='training'>
       <h3>Training</h3>
       <Warmup />
       <Technique />

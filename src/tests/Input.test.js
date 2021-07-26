@@ -1,6 +1,7 @@
 // importing component to test (react must be in scope)
 import App from "../components/App";
 import React from "react";
+import "react-redux";
 import {screen, render} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
@@ -30,37 +31,44 @@ describe('Input button', ()=>{
 })
 
 describe('When form is submitted,', ()=>{
-    test('it is no longer present in the document', ()=>{
+    test('it is no longer displayed in the document', async()=>{
         render(<App />)
         const submitButton = screen.getByTestId('submit-button')
         userEvent.click(submitButton);
-        expect(submitButton).not.toBeInTheDocument();
+        // the form is not removed from the DOM!!
+        // screen.debug(document, 20000);
+        // however, we can check the classname of form is hidden now (display: none)
+        const form = screen.getByRole('form');
+        expect(form).toHaveClass('hidden');
+        // screen.debug(form, 20000);
+        // console.log(form.classList.value, form.classList.contains('hidden'));
     })
-    test('Generate again and Reset buttons are present in the document', ()=>{
+    test('div wrapping (generate again) and (reset options) buttons is displayed in the document', ()=>{
         render(<App />)
         const submitButton = screen.getByTestId('submit-button')
         userEvent.click(submitButton);
-        const generateAgainButton = screen.getByRole('button', {name: /Generate your workout again/})
-        expect(generateAgainButton).toBeInTheDocument()
-        const resetButton = screen.getByRole('button', {name: /Reset/})
-        expect(resetButton).toBeInTheDocument()
+        const buttonsWrapper = screen.getByTestId('buttons-wrapper');
+        expect(buttonsWrapper).not.toHaveClass('hidden');
     })
-    test('and reset button is clicked, it causes the form to render again', ()=>{
+    test('and reset button is clicked, it causes the form to be displayed again', ()=>{
         render(<App />)
         const submitButton = screen.getByTestId('submit-button')
         userEvent.click(submitButton);
         const resetButton = screen.getByRole('button', {name: /Reset/})
         userEvent.click(resetButton);
-        const levelsLabel = screen.getByRole('heading', {name: /Your level:/})
-        expect(levelsLabel).toBeInTheDocument();
+        const form = screen.getByRole('form');
+        expect(form).not.toHaveClass('hidden');
     })
     test('but no strokes are selected, the form is still rendered', ()=>{
         render(<App />)
+        // deselecting freestyle (checked by default)
         const freestyleCheckbox = screen.getByRole('checkbox', {name: /Freestyle/})
         userEvent.click(freestyleCheckbox);
         expect(freestyleCheckbox).not.toBeChecked();
         const submitButton = screen.getByTestId('submit-button')
         userEvent.click(submitButton);
-        expect(freestyleCheckbox).toBeInTheDocument();
+        // validation logic prevents generating a training
+        const form = screen.getByRole('form');
+        expect(form).not.toHaveClass('hidden');
     })
 })
