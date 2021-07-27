@@ -8,3 +8,9 @@ body {
 ::placeholder {
   color: gray;
 }
+
+@layer base {
+  li {
+    @apply flex flex-row items-center
+  }
+}

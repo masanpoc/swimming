@@ -1,58 +1,75 @@
-import {createSlice} from '@reduxjs/toolkit';
-import exercisesList from '../lists/exercisesList'; 
+import { createSlice } from "@reduxjs/toolkit";
+import exercisesList from "../lists/exercisesList";
+import * as _ from "ramda";
 
 export const exercisesReducer = createSlice({
-    name: 'exercises',
-    initialState: exercisesList,
-    reducers: {
-        filterByLevel(state, action) {
-            const {level}=action.payload;
-            return state.filter(ex=>ex.level<=level)
-        },
-        filterByStroke(state, action) {
-            const {strokesTargeted} = action.payload;
-            if(strokesTargeted.length==1 && strokesTargeted[0]=='all') {
-                return state
-            } else {
-                let newState = state.slice();
-                newState=newState.filter(ex=>!ex.stroke.includes('all'));
-                let strokesToRemove = ['freestyle', 'backstroke', 'breaststroke', 'butterfly'];
-                
-                // remove exercises from state which dont have the strokes targeted
-                strokesTargeted.forEach((strokeTargeted)=>{
-                    if(strokesToRemove.includes(strokeTargeted)) {
-                        const index=strokesToRemove.indexOf(strokeTargeted);
-                        strokesToRemove.splice(index, 1);
-                    }
-                })
-                strokesToRemove.forEach((strokeToRemove)=>{
-                    newState=newState.filter(ex=>!ex.stroke.includes(strokeToRemove))
-                })
-                
-                return newState
-            }
-            
-        },
-        filterByMaterial(state, action){
-            const {material} = action.payload;
-            if(material.length==0){
-                return state
-            } else {
-                let newState = state.slice();
-                let materialsNotUsed = ['kickboard', 'fins', 'paddles', 'tube', 'pullboy'];
-                material.forEach((materialUsed)=> {
-                    const index = materialsNotUsed.indexOf(materialUsed);
-                    materialsNotUsed.splice(index,1);
-                });
-                materialsNotUsed.forEach((materialNotUsed)=>{
-                    newState=newState.filter((ex)=>!ex.material.includes(materialNotUsed));
-                })
-                return newState;
-            }
-        }
-    }
-})
+  name: "exercises",
+  initialState: exercisesList,
+  reducers: {
+    filterByLevel(state, action) {
+      const { level } = action.payload;
+      return state.filter((ex) => ex.level <= level);
+    },
+    filterByStroke(state, action) {
+      const { strokesTargeted } = action.payload;
+      if (strokesTargeted.length == 4) {
+        return state;
+      } else {
+        let newState = state.slice();
+        newState = newState.filter((ex) => !ex.stroke.includes("all"));
+        // the strokes that we have to remove
+        let strokesToRemove = [
+          "freestyle",
+          "backstroke",
+          "breaststroke",
+          "butterfly",
+        ];
+        // considering the targets
+        strokesToRemove = _.difference(strokesToRemove, strokesTargeted);
 
+        // remove exercises that includes any strokestoremove
+        strokesToRemove.forEach((strokeToRemove) => {
+          newState = newState.filter(
+            (ex) => !ex.stroke.includes(strokeToRemove)
+          );
+        });
 
-export const {filterByLevel, filterByStroke, filterByMaterial} = exercisesReducer.actions;
-export default exercisesReducer.reducer
+        return newState;
+      }
+    },
+    filterByMaterial(state, action) {
+      const { material } = action.payload;
+      if (material.length == 5) {
+        return state;
+      } else {
+        let newState = state.slice();
+        let materialsNotUsed = [
+          "kickboard",
+          "fins",
+          "paddles",
+          "snorkel",
+          "pullbuoy",
+        ];
+        materialsNotUsed = _.difference(materialsNotUsed, material);
+
+        materialsNotUsed.forEach((materialNotUsed) => {
+          newState = newState.filter(
+            (ex) => !ex.material.includes(materialNotUsed)
+          );
+        });
+        return newState;
+      }
+    },
+    resetList(state, action) {
+      const { reset } = action.payload;
+      let newState = state.slice();
+      newState = _.union(newState, reset);
+      // console.log(newState, "reset");
+      return newState;
+    },
+  },
+});
+
+export const { filterByLevel, filterByStroke, filterByMaterial, resetList } =
+  exercisesReducer.actions;
+export default exercisesReducer.reducer;
