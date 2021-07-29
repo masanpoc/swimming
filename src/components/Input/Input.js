@@ -11,6 +11,7 @@ import { copy_filter_select_techniqueExercises } from "../../slices/techniqueSli
 import { copy_filter_select_mainExercises } from "../../slices/mainSlice";
 import { copy_filter_select_cooldownExercises } from "../../slices/cooldownSlice";
 import { displayHide } from "../../slices/displaySlice";
+import { generateMeterBlocks, generateMeterExercises, generateTechniqueSets, generateMainSets } from "../../slices/setsSlice";
 import exercisesList from "../../lists/exercisesList";
 import * as _ from "ramda";
 import { useSelector } from 'react-redux'
@@ -61,13 +62,14 @@ const Input = () => {
       // console.log(
       //   getState().exercises,
       //   "before filters",
-      //   level,
+      //   level, 
       //   strokes,
       //   materials,
       //   muscles,
       //   meters,
       //   pace
       // );
+      dispatch(generateMeterBlocks({meters: meters}))
       dispatch(filterByLevel({ level }));
       dispatch(filterByStroke({ strokesTargeted: strokes }));
       dispatch(filterByMaterial({ material: materials }));
@@ -112,6 +114,15 @@ const Input = () => {
           muscle: [],
         })
       );
+      const cooldown = getState().cooldown;
+      // generate meters for every exercise in every block
+      dispatch(generateMeterExercises({warmupExs: warmup.length, techniqueExs: technique.length, mainExs: main.length, cooldownExs: cooldown.length}))
+      // generate sets for warmup exercises
+      const techniqueEachList = getState().sets.technique.each
+      dispatch(generateTechniqueSets({eachList: techniqueEachList}))
+      // generate sets for main exercises
+      const mainEachList = getState().sets.main.each
+      dispatch(generateMainSets({eachList: mainEachList}))
     };
   }
 

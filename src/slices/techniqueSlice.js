@@ -11,8 +11,8 @@ export const techniqueReducer = createSlice({
       let { filteredExercises } = action.payload;
       const { material, muscle } = action.payload;
       const techniqueExercises = [];
-      const max = 4;
-      const min = 2;
+      const max = 3;
+      const min = 1;
       const numberExercises = randomIntFromInterval(min, max);
       let pendingExercises = numberExercises;
       filteredExercises = filteredExercises.filter((ex) =>
