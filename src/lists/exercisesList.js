@@ -12,7 +12,7 @@ const exercisesList = [
   },
   {
     id: uuidv4(),
-    name: "freestyle kick",
+    name: "Freestyle kick",
     level: 1,
     stroke: "freestyle",
     block: ["main", "technique", "warmup", "cooldown"],

@@ -3,18 +3,20 @@ import { useSelector } from "react-redux";
 
 const Technique = () => {
   const technique = useSelector((state) => state.technique);
-  const techniqueMeters = useSelector((state)=> state.sets.technique.total);
+  const techniqueSets = useSelector((state)=> state.sets.technique.sets);
   return (
     <div>
-      <h4>Technique</h4>
-      <h4>{techniqueMeters}</h4>
-      {technique.map((ex) => {
+      <h4 className='text-left pl-6'><b>Technique</b></h4>
+      <div className='flex flex-col pt-3 space-y-2'>
+      {technique.map((ex, i) => {
         return (
-          <h5 key={ex.id}>
-            {ex.name}
-          </h5>
+          <div className='flex justify-between px-6 ' key={ex.id}>
+            <h3 className='flex justify-end ' style={{"width": "20%"}}>{techniqueSets[i]}</h3>
+            <h3 className='text-left ' style={{"width": "75%"}}>{ex.name}</h3> 
+          </div>
         );
       })}
+      </div>
     </div>
   );
 };

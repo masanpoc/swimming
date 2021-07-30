@@ -1,10 +1,5 @@
-.meterContainer {
-        /* position: relative;
-        
-        .unit {
-            background-color: yellow;
-            width: 10px;
-            height: 10px;
-            position: absolute;   
-        } */
+.slider {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 100%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
 }

@@ -3,18 +3,23 @@ import { useSelector } from "react-redux";
 
 const Main = () => {
   const main = useSelector((state) => state.main);
-  const mainMeters = useSelector((state)=> state.sets.main.total);
+  const mainSets = useSelector((state)=> state.sets.main.sets);
   return (
     <div>
-      <h4>Main Block</h4>
-      <h4>{mainMeters}</h4>
-      {main.map((ex) => {
-        return (
-          <h5 key={ex.id}>
-            {ex.name}
-          </h5>
-        );
-      })}
+      <h4  className='text-left pl-6'><b>Main Block {mainSets.length}</b></h4>
+      {mainSets.every(el=>typeof(el)=='string') 
+        ?  <div className='flex flex-col pt-3 space-y-2'>
+            {main.map((ex, i) => {
+              return (
+                <div className='flex justify-between px-6 ' key={ex.id}>
+                  <h3 className='flex justify-end ' style={{"width": "20%"}}>{mainSets[i]}</h3>
+                  <h3 className='text-left ' style={{"width": "75%"}}>{ex.name}</h3> 
+                </div>
+              );
+            })}
+        </div>
+        : <div>d</div>
+      }
     </div>
   );
 };

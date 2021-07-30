@@ -3,19 +3,20 @@ import { useSelector } from "react-redux";
 
 const Warmup = () => {
   const warmup = useSelector((state) => state.warmup);
-  const warmupMeters = useSelector((state)=> state.sets.warmup.total);
-
+  const warmupEach = useSelector((state)=> state.sets.warmup.each);
   return (
     <div>
-      <h4>Warm up</h4>
-      <h4>{warmupMeters}</h4>
-      {warmup.map((ex) => {
+      <h4 className='text-left pl-6'><b>Warm up</b></h4>
+      <div className='flex flex-col pt-3 space-y-2'>
+      {warmup.map((ex, i) => {
         return (
-          <h5 key={ex.id}>
-            {ex.name}
-          </h5>
+          <div className='flex justify-between px-6 ' key={ex.id}>
+            <h3 className='flex justify-end ' style={{"width": "20%"}}>{warmupEach[i]}</h3>
+            <h3 className='text-left ' style={{"width": "75%"}}>{ex.name}</h3> 
+          </div>
         );
       })}
+      </div>
     </div>
   );
 };

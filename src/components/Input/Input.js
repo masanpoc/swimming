@@ -182,21 +182,21 @@ const Input = () => {
   }
 
   return (
-    <div>
+    <div className=' mb-32'>
       
-
+      <h1 className={`font-bebas pt-8 pb-10 text-left pl-6 text-3xl ${display.form ? '' : 'hidden'}`}><u>READY?</u></h1>
       <form
         onSubmit={handleSubmit}
         id="training-form"
-        className={`my-52 mx-12 border-2 flex flex-col items-start justify-center space-y-7 border-red-500 ${display.form ? '' : 'hidden'}`}
+        className={`flex px-6  flex-col items-start justify-center space-y-10 ${display.form ? '' : 'hidden'}`}
         role='form'
       >
-        <div className="flex flex-col space-y-4 border-2 border-green-800 w-full">
-          <h3 className="text-left bg-yellow-500">Your level:</h3>
+        <div className="flex flex-col space-y-4 border-2 w-full border-lighter-grey border-opacity-40 py-4 px-4" >
+          <h3 className="text-left">Your level:</h3>
           <ul className="flex flex-row h-8">
             {
               listToMap.levels.map(level=> {return (
-                <li className='relative w-9' key={level+'_level'}>
+                <li className='relative w-9' style={{"marginRight": "0.05rem"}} key={level+'_level'}>
                   <input
                     type="radio"
                     id={level}
@@ -205,16 +205,16 @@ const Input = () => {
                     className='opacity-0'
                     onChange={(e) => setLevel(e.target.value)}
                   />
-                  <label htmlFor={level} className={`absolute flex flex-col justify-center inset-0 ${selected[level] ? 'bg-purple-600' : ''}`}>{level}</label>
+                  <label htmlFor={level} className={`absolute flex flex-col justify-center inset-0 ${selected[level] ? 'bg-blue-ocean text-white' : 'bg-light-grey bg-opacity-20'}`}>{level}</label>
                 </li>
               )})
             }
           </ul>
         </div>
         
-        <div className="flex flex-col space-y-16 w-full  bg-yellow-400">
-          <h3 className='text-left bg-red-200'>Set your meters goal:</h3>
-          <div className='relative bg-yellow-200 w-full flex flex-col justify-center'>
+        <div className="flex flex-col space-y-16 w-full border-2 border-lighter-grey border-opacity-40 pt-4 pb-5 px-4">
+          <h3 className='text-left'>Set your meters goal:</h3>
+          <div className='relative w-10/12 flex flex-col justify-center'>
             <input
               type="range"
               min="500"
@@ -223,17 +223,12 @@ const Input = () => {
               value={meters}
               id="meterSlider"
               name='meters'
-              className="w-full bg-pink-400 h-2"
-              style={
-                {
-                  "appearance": "none"
-                }
-              }
+              className="w-full h-2"
               onChange={(e) => setMeters(e.target.value)}
             />
             <output htmlFor='meters' 
-            className={`bg-green-50 w-3/12 text-sm py-1 rounded-md absolute bottom-5`}
-            style={{"left": `${_.divide(_.subtract(meters, 407.89), 36.84)}%`, "transform": "translate(-50%, 0)"}}
+            className={`bg-white shadow-sm border-opacity-40 border-lighter-grey w-3/12 text-sm py-1 rounded-md absolute bottom-5 output-meters`}
+            style={{"borderWidth": "0.5px", "left": `${_.divide(_.subtract(meters, 407.89), 36.84)}%`, "transform": "translate(-50%, 0)"}}
             >
               {meters} m
             </output>
@@ -242,9 +237,9 @@ const Input = () => {
           </div>
           
         </div>
-        <div className="flex flex-col space-y-16 w-full bg-yellow-600">
-          <h3 className='text-left bg-red-200'>Set your 100m freestyle pace:</h3>
-          <div className='relative bg-yellow-200 w-full flex flex-col justify-center'>
+        <div className="flex flex-col space-y-16 w-full border-2 border-lighter-grey border-opacity-40 pt-4 pb-5 px-4">
+          <h3 className='text-left'>Set your 100m freestyle pace:</h3>
+          <div className='relative w-8/12 flex flex-col justify-center'>
             
           <input
             type="range"
@@ -254,17 +249,12 @@ const Input = () => {
             value={pace}
             id="paceSlider"
             name='pace'
-            className="w-full bg-pink-400 h-2"
-              style={
-                {
-                  "appearance": "none"
-                }
-              }
+            className="w-full h-2"
             onChange={(e) => setPace(e.target.value)}
           />
           <output htmlFor='pace' 
-            className={`bg-green-50 text-sm px-3 py-1 rounded-md absolute bottom-5`}            
-            style={{"left": `${_.divide(_.subtract(pace, 67.8947),  0.8421)}%`, "transform": "translate(-50%, 0)"}}
+            className={`bg-white shadow-sm border-opacity-40 border-lighter-grey text-sm px-3 py-1 rounded-md absolute bottom-5`}            
+            style={{"borderWidth": "0.5px", "left": `${_.divide(_.subtract(pace, 67.8947),  0.8421)}%`, "transform": "translate(-50%, 0)"}}
             >
                {paceTime}
             </output>
@@ -272,9 +262,9 @@ const Input = () => {
           
           </div>
         </div>
-        <div className='flex flex-col w-full space-y-4 bg-yellow-600'>
-          <h3 className='text-left bg-purple-400'>Strokes for this workout:</h3>
-          <ul className='flex flex-col bg-purple-500 space-y-2 items-start'>
+        <div className='flex flex-col w-full space-y-4 border-2 border-lighter-grey border-opacity-40 py-4 px-4 '>
+          <h3 className='text-left '>Strokes for this workout:</h3>
+          <ul className='flex flex-col space-y-2 items-start'>
             {listToMap.strokes.map(stroke=>{return (
               <li className='flex w-full flex-row items-baseline space-x-2 py-1' key={stroke}>
                 <input
@@ -282,7 +272,6 @@ const Input = () => {
                   id={stroke}
                   name={stroke}
                   value={stroke}
-                  className=' bg-pink-500'
                   style={{transform: 'scale(1.2)'}}
                   checked={strokes.includes(stroke)}
                   onChange={handleStrokes}
@@ -295,11 +284,11 @@ const Input = () => {
           </ul>
         </div>
 
-        <div className='flex flex-col items-start space-y-4 w-full bg-yellow-600'>
-          <h3 className='text-left w-full bg-purple-400'>Materials you are using:</h3>
+        <div className='flex flex-col items-start space-y-4 w-full border-2 border-lighter-grey border-opacity-40 pt-4 pb-6 px-4'>
+          <h3 className='text-left w-full '>Materials you are using:</h3>
           <ul className="grid grid-cols-toggle w-full h-16 gap-1 ">
             {listToMap.materials.map(material=>{return(
-              <li className={`relative rounded-3xl ${materials.includes(material) ? 'bg-blue-600' : 'bg-blue-100'}`} key={material}>
+              <li className={`relative rounded-3xl ${materials.includes(material) ? 'bg-blue-ocean' : 'bg-light-grey bg-opacity-20'}`} key={material}>
               <input
                 type="checkbox"
                 id={material}
@@ -309,17 +298,17 @@ const Input = () => {
                 checked={materials.includes(material)}
                 onChange={handleMaterials}
               />
-              <label className='absolute flex flex-col justify-center text-sm inset-0' htmlFor={material}>{capitalizeFirstLetter(material)}</label>
+              <label className={`absolute flex flex-col justify-center text-sm inset-0 text-black ${materials.includes(material) ? 'text-white' : ''}`} htmlFor={material}>{capitalizeFirstLetter(material)}</label>
             </li>
             )})}
           </ul>
         </div>
 
-        <div className='flex flex-col items-start space-y-4 w-full bg-yellow-600'>
-          <h3  className='text-left w-full bg-purple-400'>Muscles targeted (optional)</h3>
+        <div className='flex flex-col items-start space-y-5 w-full border-2 border-lighter-grey border-opacity-40 pt-4 pb-6 px-4'>
+          <h3  className='text-left w-full'>Muscles targeted (optional)</h3>
           <ul className="grid grid-cols-toggle w-full h-16 gap-1 ">
             {listToMap.muscles.map(muscle=>{return(
-              <li className={`relative rounded-3xl ${muscles.includes(muscle) ? 'bg-blue-600' : 'bg-blue-100'}`} key={muscle}>
+              <li className={`relative rounded-3xl ${muscles.includes(muscle) ? 'bg-blue-ocean' : 'bg-light-grey bg-opacity-20'}`} key={muscle}>
               <input
                 type="checkbox"
                 id={muscle}
@@ -329,7 +318,7 @@ const Input = () => {
                 checked={muscles.includes(muscle)}
                 onChange={handleMuscles}
               />
-              <label htmlFor={muscle} className='absolute flex flex-col justify-center text-sm inset-0'>{capitalizeFirstLetter(muscle)}</label>
+              <label htmlFor={muscle} className={`absolute flex flex-col justify-center text-sm inset-0 text-black ${muscles.includes(muscle) ? 'text-white' : ''}`}>{capitalizeFirstLetter(muscle)}</label>
               
               </li>
             )})}
@@ -337,7 +326,7 @@ const Input = () => {
         </div>
 
         <input type="submit" value="Generate your workout"  data-testid="submit-button"
-          className=' bg-green-500 rounded-md px-3 py-1'
+          className=' bg-blue-ocean text-lg text-white rounded-md px-3 py-3 w-full'
         
           style={{"marginTop": "40px"}}
         />
@@ -345,14 +334,18 @@ const Input = () => {
       
       <h1 className={`${showMessage ? '' : 'hidden'}`}>Please select at least one stroke</h1>
 
-      <h1>{`${_.values(display)}`}</h1>
 
-      <div className={`${display.buttons ? '' : 'hidden'}`} data-testid='buttons-wrapper'>
-        <h2>You don&#39;t like your training ?</h2>
-        <p>Keep your preferences and generate a new training or go back to the form and set new options</p>
-        <div>
-        <button onClick={filterExercises}>Generate your workout again</button>
-        <button onClick={resetForm}>Reset Options</button>
+      <div className={`${display.buttons ? '' : 'hidden'} `} data-testid='buttons-wrapper'>
+        <h1 className='font-bebas pt-8 pb-10 text-left pl-6 text-3xl'><u>NOT CONVINCED?</u></h1>
+        <div className='flex px-6  flex-col items-start justify-center space-y-14'>
+        <div className='flex flex-col space-y-6'>
+        <p className='text-left'>If you want, you can generate a new workout keeping your preferences</p>
+        <button onClick={filterExercises} className='bg-blue-ocean text-white  text-lg rounded-md px-3 py-3 w-full'>Generate your workout again</button>
+        </div>
+        <div className='flex flex-col space-y-6'>
+        <p className='text-left'>Or maybe you could try a different workout selecting other options</p>      
+        <button onClick={resetForm} className='bg-green-herb text-white  text-lg rounded-md px-3 py-3 w-full'>Reset Options</button>
+        </div>
         </div>
       </div>
       

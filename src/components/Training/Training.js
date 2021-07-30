@@ -7,13 +7,19 @@ import { useSelector } from "react-redux";
 
 const Training = () => {
   const display = useSelector((state) => state.display); 
+  const total = useSelector((state)=> {
+    return (state.sets.warmup.total+state.sets.technique.total+state.sets.main.total+state.sets.cooldown.total)
+  })
   return (
-    <div className={`${display.training ? '' : 'hidden'}`} data-testid='training' id='training'>
-      <h3>Training</h3>
+    <div className={` mb-16 ${display.training ? '' : 'hidden'}`} data-testid='training' id='training'>
+      <h1 className='font-bebas pt-8 pb-10 text-left pl-6 text-3xl'><u>SWIM WORKOUT</u></h1>
+      <div className='flex flex-col space-y-8'>
       <Warmup />
       <Technique />
       <Main />
       <Cooldown />
+      <h2 className='text-left text-lg pl-6 pt-6'><b>Total:&nbsp;&nbsp;{total} m</b></h2>
+      </div>
     </div>
   );
 };

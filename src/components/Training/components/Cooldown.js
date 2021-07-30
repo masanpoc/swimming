@@ -4,21 +4,20 @@ import { useSelector } from "react-redux";
 const Cooldown = () => {
   const cooldown = useSelector((state) => state.cooldown);
   const cooldownMeters = useSelector((state)=> state.sets.cooldown.total);
-  const cooldownMetersEach = useSelector((state)=> state.sets.cooldown.each);
+  const cooldownEach = useSelector((state)=> state.sets.cooldown.each);
   return (
     <div>
-      <h4>Cool down</h4>
-      {cooldownMetersEach.map((el,i)=>{return(
-        <h2 key={`cooldown-${el}-${i}`}>{el}</h2>
-      )})}
-      <h4>{cooldownMeters}</h4>
-      {cooldown.map((ex) => {
+      <h4 className='text-left pl-6'><b>Cool down</b></h4>
+      <div className='flex flex-col pt-3 space-y-2'>
+      {cooldown.map((ex, i) => {
         return (
-          <h5 key={ex.id}>
-            {ex.name}
-          </h5>
+          <div className='flex justify-between px-6 ' key={ex.id}>
+            <h3 className='flex justify-end ' style={{"width": "20%"}}>{cooldownEach[i]}</h3>
+            <h3 className='text-left ' style={{"width": "75%"}}>{ex.name}</h3> 
+          </div>
         );
       })}
+      </div>
     </div>
   );
 };
