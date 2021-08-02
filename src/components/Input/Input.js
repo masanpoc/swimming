@@ -336,7 +336,7 @@ const Input = () => {
 
 
       <div className={`${display.buttons ? '' : 'hidden'} `} data-testid='buttons-wrapper'>
-        <h1 className='font-bebas pt-8 pb-10 text-left pl-6 text-3xl'><u>NOT CONVINCED?</u></h1>
+        <h1 className='font-bebas pt-4 pb-10 text-left pl-6 text-3xl'><u>NOT CONVINCED?</u></h1>
         <div className='flex px-6  flex-col items-start justify-center space-y-14'>
         <div className='flex flex-col space-y-6'>
         <p className='text-left'>If you want, you can generate a new workout keeping your preferences</p>

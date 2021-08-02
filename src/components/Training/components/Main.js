@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import generateTimes from "../../../functions/generateTimes";
 
 const Main = () => {
   const main = useSelector((state) => state.main);
   const mainSets = useSelector((state)=> state.sets.main.sets);
+  const mainEach = useSelector((state)=> state.sets.main.each);
   return (
     <div>
       <h4  className='text-left pl-6'><b>Main Block {mainSets.length}</b></h4>
