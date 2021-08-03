@@ -1,5 +1,7 @@
+
+
 export default function generateEach(meters, exs) {
-    // console.log(meters, exs, 'meters and exercises passed to the function')
+    console.log(meters, exs, 'meters and number exercises passed to the function')
     let list = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
     // if exs==1 => return [meters]
     // else :
@@ -17,7 +19,6 @@ export default function generateEach(meters, exs) {
             list.pop();
         }
         if(meters>1000) {
-            list.shift();
             list.shift();
             list.pop();
             list.pop();
@@ -37,12 +38,12 @@ export default function generateEach(meters, exs) {
             list.splice(randomIndexToAddEach, 1);
             }
             left -= list[randomIndexToAddEach]
-            // console.log(eachArr, )
+            console.log(eachArr, 'array in process')
         } else {
             console.log(left, 'left')
             
             eachArr.push(left);
-            // console.log(eachArr, 'array of the block')
+            console.log(eachArr, 'array of the block')
             // do  {
             //     var randomMetersToAddEach=list[Math.floor(Math.random()*list.length)];
             //     left -= randomMetersToAddEach;

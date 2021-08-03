@@ -8,7 +8,7 @@ export const cooldownReducer = createSlice({
   reducers: {
     copy_filter_select_cooldownExercises(state, action) {
       let { filteredExercises } = action.payload;
-      const { material, muscle } = action.payload;
+      const { material } = action.payload;
       const cooldownExercises = [];
       const max = 3;
       const min = 1;

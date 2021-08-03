@@ -73,7 +73,7 @@ const Input = () => {
         copy_filter_select_warmupExercises({
           filteredExercises: filteredList,
           material: ["kickboard", "snorkel", "paddles", "fins", "pullbuoy"],
-          muscle: [],
+          muscle: muscles,
         })
       );
       const warmup = getState().warmup;
@@ -85,7 +85,7 @@ const Input = () => {
         copy_filter_select_techniqueExercises({
           filteredExercises: filteredList,
           material: ["kickboard", "snorkel", "paddles", "fins", "pullbuoy"],
-          muscle: [],
+          muscle: muscles,
         })
       );
       const technique = getState().technique;
@@ -95,7 +95,7 @@ const Input = () => {
         copy_filter_select_mainExercises({
           filteredExercises: filteredList,
           material: ["kickboard", "snorkel", "paddles", "fins", "pullbuoy"],
-          muscle: [],
+          muscle: muscles,
         })
       );
       const main = getState().main;
@@ -104,8 +104,7 @@ const Input = () => {
       dispatch(
         copy_filter_select_cooldownExercises({
           filteredExercises: filteredList,
-          material: ["kickboard", "snorkel", "paddles", "fins", "pullbuoy"],
-          muscle: [],
+          material: ["kickboard", "snorkel", "paddles", "fins", "pullbuoy"]
         })
       );
       const cooldown = getState().cooldown;

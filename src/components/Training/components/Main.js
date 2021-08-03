@@ -4,6 +4,8 @@ import generateTimes from "../../../functions/generateTimes";
 
 const Main = () => {
   const main = useSelector((state) => state.main);
+  const mainTotal = useSelector((state)=> state.sets.main.total);
+  const mainEach = useSelector((state)=> state.sets.main.each);
   const mainSets = useSelector((state)=> state.sets.main.sets);
   const pace = useSelector((state)=>state.pace)
 
@@ -43,7 +45,11 @@ const Main = () => {
   return (
     <div>
       <h4  className='text-left pl-6'><b>Main Block</b></h4>
-      {mainSets.every(el=>typeof(el)=='string') 
+      <h2>{mainTotal}</h2>
+      <h3 className='flex justify-center space-x-2 w-full bg-blue-ocean'>{mainEach.map((el, i)=>{return(
+        <h4 key='i'>{el}</h4>
+      )})}</h3>
+      {/* {mainSets.every(el=>typeof(el)=='string') 
         ?  <div className='flex flex-col pt-3 space-y-2'>
             {main.map((ex, i) => {
               return (
@@ -56,17 +62,17 @@ const Main = () => {
         </div>
         : <div>
           {mainSets.map((blockSet,i)=>{return (
-            <div className='flex w-full pt-3 px-6 justify-between' key={`${blockSet}-${i}`}>
-              <div className='bg-blue-ocean flex justify-between'  style={{"width": "20%"}}>
-                <span>{blockSet.sets}</span>
-                <div className='h-4 w-0 bg-lighter-grey'></div>
-                <div className='flex flex-col' >
+            <div className='flex w-full pt-4 px-6 justify-between' key={`${blockSet}-${i}`}>
+              <div className='flex space-x-1 pt-1'  style={{"width": "20%"}}>
+                <span className='flex flex-col justify-center'>{blockSet.sets}</span>
+                <div className='h-full w-0.5 bg-black'></div>
+                <div className='h-full w-full flex flex-col space-y-9 ' >
                 {blockSet.eachSet.map((singleSet, i)=>{return (
-                  <h2 key={singleSet+i}>{singleSet}</h2>
+                  <h2 key={singleSet+i} className='w-full text-sm' >{singleSet}</h2>
                 )})}
                 </div>
               </div>
-              <div className='flex flex-col bg-green-herb space-y-2' style={{"width": "75%"}}>
+              <div className='flex flex-col space-y-2' style={{"width": "75%"}}>
                 {main.map((ex)=> {
                   return (
                     <h3 className='text-left' key={ex.id}>
@@ -78,7 +84,7 @@ const Main = () => {
             </div>
           )})}
         </div>
-      }
+      } */}
     </div>
   );
 };

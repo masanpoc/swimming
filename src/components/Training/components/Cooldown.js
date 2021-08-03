@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 const Cooldown = () => {
   const cooldown = useSelector((state) => state.cooldown);
-  const cooldownMeters = useSelector((state)=> state.sets.cooldown.total);
   const cooldownEach = useSelector((state)=> state.sets.cooldown.each);
   return (
     <div>
