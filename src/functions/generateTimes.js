@@ -1,3 +1,14 @@
+
+import formatPace from "./formatPace";
+
+function conditionalFormat(toFormat) {
+    if(toFormat>55){
+        return formatPace(toFormat)
+    } else {
+        return toFormat+'s'
+    }
+}
+
 function selectAtTiming (pace, meters) {
     const intervals = {
         50: [5, 10],
@@ -21,21 +32,21 @@ function round5(x) {
 function selectOnLessTiming (pace, meters) {
     const intervals = {
         50: [
-            [round5(pace/2), 'resting 15s'] 
+            [round5(pace/2), ' resting 15s'] 
         ],
         100: [
-            [pace, 'resting 15s'],
-            [pace+5, 'resting 20s']
+            [pace, ' resting 15s'],
+            [pace+5, ' resting 20s']
         ],
         200: [
-            [(pace*2)+10, 'resting 40s'],
-            [(pace*2)+15, 'resting 30s'],
-            [(pace*2)+20, 'resting 20s']
+            [(pace*2)+10, ' resting 40s'],
+            [(pace*2)+15, ' resting 30s'],
+            [(pace*2)+20, ' resting 20s']
         ]
     }
     function generateTimingOnLessByMeters(meters) {
         let onTimingArr = randomValue(intervals[meters]);
-        let onTiming = onTimingArr[0]+onTimingArr[1];  
+        let onTiming = conditionalFormat(onTimingArr[0])+onTimingArr[1];  
         return onTiming
     }
     let onLessTimingGenerated = generateTimingOnLessByMeters(meters);
@@ -70,21 +81,18 @@ export default function generateTimes(pace, meters, style) {
         // two types of timing: 'on less than 1:20 resting 20s' || 'at 1:40' (50% probability)
         if(Math.random()>0.5) {
             // timing on less than
-            let arrTiming = selectOnLessTiming(pace, meters);
-            let timing = 'on less than' + randomValue(arrTiming);
+            let timing = 'on less than ' + selectOnLessTiming(pace, meters);
             return timing
         } else {
             // timing at
-            let arrTiming = selectAtTiming(pace, meters);
-            let timing = 'at' + randomValue(arrTiming);
+            let timing = 'at ' +  conditionalFormat(selectAtTiming(pace, meters));
             return timing
         }
     }
     else {
         // either breaststroke, backstroke, butterfly or medley or 150m freestyle/300freestyle/400freestyle...
         // only one type of timing: 'resting 10s'
-        let arrRests = selectRestTiming(meters);
-        let timing='resting'+ randomValue(arrRests);
+        let timing='resting '+ selectRestTiming(meters) + 's';
         return timing
     }
 }

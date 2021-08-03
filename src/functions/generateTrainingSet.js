@@ -5,6 +5,9 @@ function calculateSet(each, total) {
 export default function generateTrainingSet(meters) { 
     let sets = [50, 100, 150, 200, 250, 300, 400];
     sets=sets.filter(el=>el<=meters);
+    if(meters<100){
+        sets.push(25)
+    }
     let possibleSets=sets.reduce(function(list,each) {
         if(meters%each==0){
             let set = calculateSet(each, meters);

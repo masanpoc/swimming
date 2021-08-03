@@ -12,7 +12,8 @@ const Training = () => {
   })
   return (
     <div className={` mb-16 ${display.training ? '' : 'hidden'}`} data-testid='training' id='training'>
-      <h1 className='font-bebas pt-8 pb-10 text-left pl-6 text-3xl'><u>SWIM WORKOUT</u></h1>
+    <hr className='h-1 text-dark-grey bg-dark-grey'></hr>
+      <h1 className='font-bebas pt-12 pb-10 text-left pl-6 text-3xl'><u>SWIM WORKOUT</u></h1>
       <div className='flex flex-col space-y-8 pb-6'>
       <Warmup />
       <Technique />

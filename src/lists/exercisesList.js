@@ -516,7 +516,7 @@ const exercisesList = [
   },
   {
     id: uuidv4(),
-    name: "Freestyle with kickboard between legs, touching kickboard",
+    name: "Freestyle touching kickboard between legs",
     level: 1,
     stroke: "freestyle",
     block: ["warmup", "cooldown", "technique"],
@@ -534,7 +534,7 @@ const exercisesList = [
   },
   {
     id: uuidv4(),
-    name: "Freestyle with hand extension/sliding 3seconds",
+    name: "Freestyle with hand extension/sliding 3 seconds",
     level: 2,
     stroke: "freestyle",
     block: ["warmup", "technique", "cooldown"],

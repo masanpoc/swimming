@@ -15,7 +15,7 @@ const App = () => {
           <h1 className='font-bebas text-left px-6 text-3xl h-20 flex flex-col justify-center'>SWIMMING WORKOUT GENERATOR</h1>
           <hr className='h-1 text-dark-grey bg-dark-grey'></hr>
         </header>
-        <div className='my-8 flex-col flex gap-4'>
+        <div className='mt-6 mb-10 flex-col flex gap-4'>
           <div className='py-4 flex flex-col gap-5 text-left px-6'>
             <p>
             Welcome to my swim app!

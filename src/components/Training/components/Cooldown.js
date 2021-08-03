@@ -13,7 +13,7 @@ const Cooldown = () => {
         return (
           <div className='flex justify-between px-6 ' key={ex.id}>
             <h3 className='flex justify-end ' style={{"width": "20%"}}>{cooldownEach[i]}</h3>
-            <h3 className='text-left ' style={{"width": "75%"}}>{ex.name}</h3> 
+            <h3 className='text-left' style={{"width": "75%"}}>{ex.name}</h3> 
           </div>
         );
       })}

@@ -6,6 +6,7 @@ import techniqueReducer from "./slices/techniqueSlice";
 import cooldownReducer from "./slices/cooldownSlice";
 import displayReducer from "./slices/displaySlice";
 import setsReducer from "./slices/setsSlice";
+import paceReducer from "./slices/paceSlice";
 
 export default configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export default configureStore({
     technique: techniqueReducer,
     cooldown: cooldownReducer,
     display: displayReducer,
-    sets: setsReducer
+    sets: setsReducer,
+    pace: paceReducer
   },
 });

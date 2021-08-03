@@ -12,20 +12,13 @@ import { copy_filter_select_mainExercises } from "../../slices/mainSlice";
 import { copy_filter_select_cooldownExercises } from "../../slices/cooldownSlice";
 import { displayHide } from "../../slices/displaySlice";
 import { generateMeterBlocks, generateMeterExercises, generateTechniqueSets, generateMainSets } from "../../slices/setsSlice";
+import { setReduxPace } from "../../slices/paceSlice";
 import exercisesList from "../../lists/exercisesList";
 import * as _ from "ramda";
 import { useSelector } from 'react-redux'
+import formatPace from '../../functions/formatPace';
+import capitalizeFirstLetter from '../../functions/capitalizeFirstLetter';
 
-function formatPace(duration) {
-  let minutes = Math.floor(duration / 60);
-  let seconds =
-    (duration % 60).toString().length > 1 ? duration % 60 : `0${duration % 60}`;
-  return `${minutes}:${seconds}`;
-}
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 const Input = () => {
   const [strokes, setStrokes] = useState(['freestyle']);
@@ -73,6 +66,7 @@ const Input = () => {
       dispatch(filterByLevel({ level }));
       dispatch(filterByStroke({ strokesTargeted: strokes }));
       dispatch(filterByMaterial({ material: materials }));
+      dispatch(setReduxPace({pace: pace}));
       let filteredList = getState().exercises;
       // console.log(filteredList, "after filters");
       dispatch(
@@ -184,7 +178,8 @@ const Input = () => {
   return (
     <div className=' mb-32'>
       
-      <h1 className={`font-bebas pt-8 pb-10 text-left pl-6 text-3xl ${display.form ? '' : 'hidden'}`}><u>READY?</u></h1>
+      <hr className={`h-1 text-dark-grey bg-dark-grey ${display.form ? '' : 'hidden'}`}></hr>
+      <h1 className={`font-bebas pt-12 pb-10 text-left pl-6 text-3xl ${display.form ? '' : 'hidden'}`}><u>READY?</u></h1>
       <form
         onSubmit={handleSubmit}
         id="training-form"
