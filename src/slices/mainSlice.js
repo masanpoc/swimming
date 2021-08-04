@@ -8,11 +8,15 @@ export const mainReducer = createSlice({
   reducers: {
     copy_filter_select_mainExercises(state, action) {
       let { filteredExercises } = action.payload;
-      const { material, muscle } = action.payload;
+      const { material, muscle, meters } = action.payload;
       const mainExercises = [];
-      const max = 6;
-      const min = 2;
-      const numberExercises = randomIntFromInterval(min, max);
+      const max = 4;
+      const min = 1;
+      let numberExercises;
+      do {
+        numberExercises = randomIntFromInterval(min, max);
+        console.log('trying')
+      } while(meters/numberExercises<25);
       let pendingExercises = numberExercises;
       filteredExercises = filteredExercises.filter((ex) =>
         ex.block.includes("main")

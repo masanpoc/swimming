@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { filter } from "ramda";
 import randomIntFromInterval from "../functions/randomIntFromInterval";
 import shuffle from "../functions/shuffle";
 
@@ -8,26 +9,30 @@ export const cooldownReducer = createSlice({
   reducers: {
     copy_filter_select_cooldownExercises(state, action) {
       let { filteredExercises } = action.payload;
-      const { material } = action.payload;
+      const { material, meters } = action.payload;
       const cooldownExercises = [];
       const max = 3;
       const min = 1;
-      const numberExercises = randomIntFromInterval(min, max);
+      let numberExercises;
+      do {
+        numberExercises = randomIntFromInterval(min, max);
+        console.log('trying')
+      } while(meters/numberExercises<25);
       let pendingExercises = numberExercises;
       filteredExercises = filteredExercises.filter((ex) =>
         ex.block.includes("cooldown")
       );
+      console.log('starting array cooldown', filteredExercises)
       // logic for deterministic+random selection:
       // cooldown => do not use advanced equipment
       if (
         material.length > 0 &&
-        (material.includes("kickboard") || material.includes("pullbuoy"))
+        (material.includes("kickboard") || material.includes("pullbuoy") || material.includes("snorkel"))
       ) {
         // filter out exs with fins, paddles or snorkel
         let exs_material = filteredExercises
           .filter((ex) => !ex.material.includes("paddles"))
           .filter((ex) => !ex.material.includes("fins"))
-          .filter((ex) => !ex.material.includes("snorkel"));
 
         // filter in exercises of our list that contain any material that the swimmer is using
         exs_material = exs_material.filter((ex) =>
@@ -48,6 +53,7 @@ export const cooldownReducer = createSlice({
             let arrayToSelectFrom = exs_material.filter((ex) =>
               ex.material.includes(cooldownTool)
             );
+            console.log('array to select from with material', arrayToSelectFrom)
             if (arrayToSelectFrom.length > 0) {
               let selected =
                 arrayToSelectFrom[
@@ -60,11 +66,12 @@ export const cooldownReducer = createSlice({
               );
               exs_material.splice(index, 1);
               filteredExercises.splice(index2, 1);
-              // push to cooldown
+              // push to cooldown 
               if (selected) {
                 cooldownExercises.push(selected);
               }
-
+              
+            console.log(selected, 'selected cooldown ex with material')
               pendingExercises--;
               counter++;
             }
@@ -95,9 +102,11 @@ export const cooldownReducer = createSlice({
       // following loop won't run if pendingExercises=0
       for (let i = 0; i < pendingExercises; i++) {
         // select random exercise
+        // console.log(exs_left, 'array to select from without material')
         let selected = exs_left[Math.floor(Math.random() * exs_left.length)];
         let index = exs_left.indexOf(selected);
         exs_left.splice(index, 1);
+        // console.log(selected, 'selected cooldown ex without material')
         if (selected) {
           cooldownExercises.push(selected);
         }

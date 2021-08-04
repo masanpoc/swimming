@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux'
 import formatPace from '../../functions/formatPace';
 import capitalizeFirstLetter from '../../functions/capitalizeFirstLetter';
 
+let inputData = {}; 
 
 const Input = () => {
   const [strokes, setStrokes] = useState(['freestyle']);
@@ -62,18 +63,19 @@ const Input = () => {
       //   meters,
       //   pace
       // );
-      dispatch(generateMeterBlocks({meters: meters}))
-      dispatch(filterByLevel({ level }));
-      dispatch(filterByStroke({ strokesTargeted: strokes }));
-      dispatch(filterByMaterial({ material: materials }));
-      dispatch(setReduxPace({pace: pace}));
+      dispatch(generateMeterBlocks({meters: inputData.meters}))
+      dispatch(filterByLevel({ level: inputData.level }));
+      dispatch(filterByStroke({ strokesTargeted: inputData.strokes }));
+      dispatch(filterByMaterial({ material: inputData.materials }));
+      dispatch(setReduxPace({pace: inputData.pace}));
       let filteredList = getState().exercises;
       // console.log(filteredList, "after filters");
       dispatch(
         copy_filter_select_warmupExercises({
           filteredExercises: filteredList,
-          material: ["kickboard", "snorkel", "paddles", "fins", "pullbuoy"],
-          muscle: muscles,
+          material: inputData.materials,
+          muscle: inputData.muscles,
+          meters: getState().sets.warmup.total
         })
       );
       const warmup = getState().warmup;
@@ -84,8 +86,9 @@ const Input = () => {
       dispatch(
         copy_filter_select_techniqueExercises({
           filteredExercises: filteredList,
-          material: ["kickboard", "snorkel", "paddles", "fins", "pullbuoy"],
-          muscle: muscles,
+          material: inputData.materials,
+          muscle: inputData.muscles,
+          meters: getState().sets.technique.total
         })
       );
       const technique = getState().technique;
@@ -94,8 +97,9 @@ const Input = () => {
       dispatch(
         copy_filter_select_mainExercises({
           filteredExercises: filteredList,
-          material: ["kickboard", "snorkel", "paddles", "fins", "pullbuoy"],
-          muscle: muscles,
+          material: inputData.materials,
+          muscle: inputData.muscles,
+          meters: getState().sets.main.total
         })
       );
       const main = getState().main;
@@ -104,7 +108,8 @@ const Input = () => {
       dispatch(
         copy_filter_select_cooldownExercises({
           filteredExercises: filteredList,
-          material: ["kickboard", "snorkel", "paddles", "fins", "pullbuoy"]
+          material: inputData.materials,
+          meters: getState().sets.cooldown.total
         })
       );
       const cooldown = getState().cooldown;
@@ -120,6 +125,7 @@ const Input = () => {
   }
 
   function filterExercises() {
+    // console.log(inputData);
     // dispatch(calling thunk action creator) in order to dispatch dependent to each other state updates
     dispatch(thunkActionCreator());
   }
@@ -133,6 +139,14 @@ const Input = () => {
     } else {
       setShowMessage(false)
       dispatch(displayHide({form: false, training: true, buttons: true}))
+      // as it rerenders, we dont want to lose our input data, so we store it outside our component in an object
+      inputData.level=level;
+      inputData.strokes=strokes;
+      inputData.materials=materials;
+      inputData.muscles=muscles;
+      inputData.meters=meters;
+      inputData.pace=pace;
+      // console.log(inputData);
       filterExercises();
     }
   }

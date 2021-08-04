@@ -7,7 +7,7 @@ const Cooldown = () => {
   return (
     <div>
       <h4 className='text-left pl-6'><b>Cool down</b></h4>
-      <div className='flex flex-col pt-3 space-y-2'>
+      <div className='flex flex-col pt-4 space-y-2'>
       {cooldown.map((ex, i) => {
         return (
           <div className='flex justify-between px-6 ' key={ex.id}>

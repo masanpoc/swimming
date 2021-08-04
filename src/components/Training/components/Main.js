@@ -9,48 +9,19 @@ const Main = () => {
   const mainSets = useSelector((state)=> state.sets.main.sets);
   const pace = useSelector((state)=>state.pace)
 
-  function makeSetsIterator(sets) {
-      const length = sets.length;
-      let counterBlock = 0;
-      let counterSet = 0;
-      const setsIterator = {
-            next: function() {
-                let result;
-                // looping over blocks
-                  // number of sets in first block
-                    let numberSets = sets[counterBlock].sets;
-                    // looping over each set
-                    if(counterSet<numberSets && counterBlock < length){
-                      result = { value: sets[counterBlock].eachSet[counterSet], done: false}
-                      counterSet++;
-                      console.log(result.value, 'result next')
-                      return result
-                    }
-                    counterBlock++;
-                    numberSets = sets[counterBlock].sets;
-                    if(counterSet<numberSets && counterBlock < length){
-                      result = { value: sets[counterBlock].eachSet[counterSet], done: false}
-                      counterSet++;
-                      console.log(result.value, 'result next')
-                      return result
-                    }
-                
-                return { done: true }
-            }
-          };
-      return setsIterator;
-  }
-  const it = makeSetsIterator(mainSets);
-
+  let eachSetMetersList = {1: [], 2: []};
+  // console.log(mainEach)
+  // console.log(mainTotal)
+  // console.log(mainSets)
   return (
     <div>
       <h4  className='text-left pl-6'><b>Main Block</b></h4>
-      <h2>{mainTotal}</h2>
+      {/* <h2>{mainTotal}</h2>
       <h3 className='flex justify-center space-x-2 w-full bg-blue-ocean'>{mainEach.map((el, i)=>{return(
-        <h4 key='i'>{el}</h4>
-      )})}</h3>
-      {/* {mainSets.every(el=>typeof(el)=='string') 
-        ?  <div className='flex flex-col pt-3 space-y-2'>
+        <span key={i}>{String(el)}</span>
+      )})}</h3> */}
+      {mainSets.every(el=>typeof(el)=='string') 
+        ?  <div className='flex flex-col pt-4 space-y-2'>
             {main.map((ex, i) => {
               return (
                 <div className='flex justify-between px-6 ' key={ex.id}>
@@ -60,31 +31,64 @@ const Main = () => {
               );
             })}
         </div>
-        : <div>
-          {mainSets.map((blockSet,i)=>{return (
-            <div className='flex w-full pt-4 px-6 justify-between' key={`${blockSet}-${i}`}>
+        : <div className='flex flex-col space-y-3'>
+
+
+
+          {mainSets.map((blockSet,index)=>{
+            
+            return (
+            <div className='flex w-full pt-4 px-6 justify-between' key={`${blockSet}-${index}`}>
               <div className='flex space-x-1 pt-1'  style={{"width": "20%"}}>
                 <span className='flex flex-col justify-center'>{blockSet.sets}</span>
                 <div className='h-full w-0.5 bg-black'></div>
-                <div className='h-full w-full flex flex-col space-y-9 ' >
-                {blockSet.eachSet.map((singleSet, i)=>{return (
+                <div className='h-full w-full flex flex-col space-y-12 ' >
+                {blockSet.eachSet.map((singleSet, i)=>{
+                  eachSetMetersList[index+1].push(singleSet.split('x')[1])
+                  return (
                   <h2 key={singleSet+i} className='w-full text-sm' >{singleSet}</h2>
                 )})}
                 </div>
               </div>
               <div className='flex flex-col space-y-2' style={{"width": "75%"}}>
-                {main.map((ex)=> {
+                {
+                  eachSetMetersList[index+1].map((val, index2)=>{
+                    if(index==0){
+                      {/* console.log(main, 'main')
+                      console.log(index2, 'index2')
+                      console.log(main[index2], 'main[index2]') */}
+                      return(
+                        <h3 className='text-left' key={main[index2].id}>
+                          {main[index2].name} {generateTimes(pace, Number(eachSetMetersList[index+1][index2]), main[index2].stroke)}
+                        </h3>
+                      )
+                    }
+                    if(index==1){
+                      return(
+                        <h3 className='text-left' key={main[index2+2].id}>
+                          {main[index2+2].name} {generateTimes(pace, Number(eachSetMetersList[index+1][index2]), main[index2+2].stroke)}
+                        </h3>
+                      )
+                    }
+                  })
+                }
+                {/* {main.map((ex, i)=> {
+                  console.log(eachSetMetersList[i], 'next value')
                   return (
                     <h3 className='text-left' key={ex.id}>
-                      {ex.name} {generateTimes(pace, Number(it.next().value.split('x')[1]), ex.stroke)}
+                      {ex.name} {generateTimes(pace, Number(eachSetMetersList[i]), ex.stroke)}
                     </h3>
                   )
-                })}
+                })} */}
               </div>
             </div>
           )})}
+
+
+
+          
         </div>
-      } */}
+      }
     </div>
   );
 };

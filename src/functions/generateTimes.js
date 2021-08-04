@@ -16,7 +16,16 @@ function selectAtTiming (pace, meters) {
         200: [10, 15, 20, 25, 30]
     }
     function generateByMeters(pace, meters) {
-        let atTiming = pace;
+        let atTiming;
+        if(meters==50){
+            atTiming = pace/2;
+        }
+        if(meters==100){
+            atTiming = pace/2;
+        }
+        if(meters==200){
+            atTiming = pace*2;
+        }
         let toAdd = randomValue(intervals[meters]);
         atTiming += toAdd;
         return atTiming
@@ -55,6 +64,7 @@ function selectOnLessTiming (pace, meters) {
 
 function selectRestTiming (meters) {
     const intervals = {
+        25: [5, 10, 15],
         50: [5, 10, 15],
         100: [5, 10, 15, 20],
         150: [10, 15, 20],

@@ -23,7 +23,7 @@ export const setsReducer = createSlice({
         },
         generateMainSets(state,action) {
             const {eachList} = action.payload;
-            if(Math.random() < 0.5 && state.main.total>1000) {
+            if(Math.random() < 0.5 && state.main.total>1000 && eachList.length>1) {
                 // do logic to do blocks of 2 layer sets
                 if(eachList.length>3){
                     if(Math.random() < 0.5) {
@@ -39,7 +39,7 @@ export const setsReducer = createSlice({
                         // let index1 = eachList1.indexOf(Math.max(...eachList1));
                         // eachList1[index1]-=50;
                         let eachList2 = eachList.slice (0, cutIndex);
-                        console.log(eachList1, eachList2, indexes)
+                        // console.log(eachList1, eachList2, indexes)
                         //  // take 50 m from largest each
                         //  let index2 = eachList2.indexOf(Math.max(...eachList2));
                         //  eachList2[index2]-=50;
@@ -64,7 +64,7 @@ export const setsReducer = createSlice({
                 let setList = eachList.map(el=>generateTrainingSet(el))
                 state.main.sets=setList;
             }
-            console.log(state.main.sets, 'final main sets without rests');
+            console.log(state.main.sets, 'final main sets');
             return state
         },
         generateTechniqueSets(state, action) {
@@ -73,7 +73,7 @@ export const setsReducer = createSlice({
             let setList = eachList.map(el=>generateTrainingSet(el))
             // console.log(eachList, 'after')
             state.technique.sets=setList;
-            console.log(state.technique.sets, 'final technique sets');
+            // console.log(state.technique.sets, 'final technique sets');
             return state
         }
     }

@@ -1,54 +1,22 @@
 
+import possibleEachList from '../lists/possibleEachList';
+import shuffle from './shuffle';
+
+function randomValue(arr) {
+    return arr[Math.floor(Math.random()*arr.length)]
+}
 
 export default function generateEach(meters, exs) {
-    console.log(meters, exs, 'meters and number exercises passed to the function')
-    let list = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
-    // if exs==1 => return [meters]
-    // else :
-    list=list.filter(el=>el<meters)
-    let rate = meters/exs;
-    if(rate>=100){
-        list=list.filter(el=>el>50);
-        if(meters>400 && exs>1) {
-            list.pop();
-        }
-        if(meters>400 && exs>2) {
-            list.pop();
-        }
-        if(meters>600 && exs>2) {
-            list.pop();
-        }
-        if(meters>1000) {
-            list.shift();
-            list.pop();
-            list.pop();
-        }
-    } 
-    if(rate<100) {
-        list=list.filter(el=>el<100)
-    }
-    let eachArr = [];
-    let left = meters;
-    for(let i=0; i<exs; i++) {
-        if(i<(exs-1)){
-            let randomIndexToAddEach =Math.floor(Math.random()*list.length)
-            eachArr.push(list[randomIndexToAddEach]);
-            if(meters>1000 && list[randomIndexToAddEach]>=400){
-                
-            list.splice(randomIndexToAddEach, 1);
-            }
-            left -= list[randomIndexToAddEach]
-            console.log(eachArr, 'array in process')
-        } else {
-            console.log(left, 'left')
-            
-            eachArr.push(left);
-            console.log(eachArr, 'array of the block')
-            // do  {
-            //     var randomMetersToAddEach=list[Math.floor(Math.random()*list.length)];
-            //     left -= randomMetersToAddEach;
-            // } while((left-randomMetersToAddEach)!=0)
-        }
+    console.log(meters, 'meters', exs, 'num exs')
+    console.log(possibleEachList[meters][exs], 'each possible lists for those meters')
+    let eachArr;
+    if(possibleEachList[meters][exs]){
+        let possibleEachListSelected =randomValue(possibleEachList[meters][exs]);
+        eachArr = possibleEachListSelected;
+        // eachArr = shuffle(...possibleEachListSelected)
+        console.log('selected and shuffled', eachArr)
+    } else {
+        console.log('error, not found list of each')
     }
     return eachArr
 }
