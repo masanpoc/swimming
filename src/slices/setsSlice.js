@@ -69,11 +69,10 @@ export const setsReducer = createSlice({
         },
         generateTechniqueSets(state, action) {
             const {eachList} = action.payload;
-            // console.log(eachList, 'before')
+            console.log(eachList, 'before technique')
             let setList = eachList.map(el=>generateTrainingSet(el))
-            // console.log(eachList, 'after')
             state.technique.sets=setList;
-            // console.log(state.technique.sets, 'final technique sets');
+            console.log(state.technique.sets, 'final technique sets');
             return state
         }
     }

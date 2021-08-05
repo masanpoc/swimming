@@ -38,7 +38,7 @@ export const mainReducer = createSlice({
           let arrayToSelectFrom = exs_material.filter((ex) =>
             ex.material.includes(mainTool)
           );
-          if (arrayToSelectFrom.length > 0 && counter < 2) {
+          if (arrayToSelectFrom.length > 0 && counter < 2  && pendingExercises>0) {
             let selected =
               arrayToSelectFrom[
                 Math.floor(Math.random() * arrayToSelectFrom.length)

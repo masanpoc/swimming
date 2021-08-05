@@ -18,6 +18,7 @@ export const techniqueReducer = createSlice({
         numberExercises = randomIntFromInterval(min, max);
         console.log('trying')
       } while(meters/numberExercises<25);
+      console.log('before or after trying???', meters/numberExercises, meters, numberExercises)
       let pendingExercises = numberExercises;
       filteredExercises = filteredExercises.filter((ex) =>
         ex.block.includes("technique")
@@ -42,7 +43,7 @@ export const techniqueReducer = createSlice({
           let arrayToSelectFrom = exs_material.filter((ex) =>
             ex.material.includes(techniqueTool)
           );
-          if (arrayToSelectFrom.length > 0 && counter < 3) {
+          if (arrayToSelectFrom.length > 0 && counter < 3 && pendingExercises>0) {
             let selected =
               arrayToSelectFrom[
                 Math.floor(Math.random() * arrayToSelectFrom.length)
@@ -58,7 +59,7 @@ export const techniqueReducer = createSlice({
             if (selected) {
               techniqueExercises.push(selected);
             }
-
+            // problem heeeere
             pendingExercises--;
             counter++;
           }
