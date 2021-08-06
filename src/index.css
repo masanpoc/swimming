@@ -8,37 +8,34 @@
 
 /* move to base layer */
 @font-face {
-  font-family: 'Bebas Neue';
-  src: url('./fonts/BebasNeue-Regular.woff2') format('woff2'),
-      url('./fonts/BebasNeue-Regular.woff') format('woff');
+  font-family: "Bebas Neue";
+  src: url("./fonts/BebasNeue-Regular.woff2") format("woff2"),
+    url("./fonts/BebasNeue-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Lato';
-  src: url('./fonts/Lato-Regular.woff2') format('woff2'),
-      url('./fonts/Lato-Regular.woff') format('woff');
+  font-family: "Lato";
+  src: url("./fonts/Lato-Regular.woff2") format("woff2"),
+    url("./fonts/Lato-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Play';
-  src: url('./fonts/Play-Regular.woff2') format('woff2'),
-      url('./fonts/Play-Regular.woff') format('woff');
+  font-family: "Play";
+  src: url("./fonts/Play-Regular.woff2") format("woff2"),
+    url("./fonts/Play-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
-
-
 
 @layer base {
   body {
-    @apply font-lato bg-white
+    @apply font-lato bg-white;
   }
-  
 }

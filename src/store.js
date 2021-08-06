@@ -17,6 +17,6 @@ export default configureStore({
     cooldown: cooldownReducer,
     display: displayReducer,
     sets: setsReducer,
-    pace: paceReducer
+    pace: paceReducer,
   },
 });

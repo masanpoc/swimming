@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import randomIntFromInterval from "../functions/randomIntFromInterval";
 import shuffle from "../functions/shuffle";
-// import * as _ from 'ramda'
+import randomValue from "../functions/randomValue";
 
 export const techniqueReducer = createSlice({
   name: "technique",
@@ -9,16 +9,29 @@ export const techniqueReducer = createSlice({
   reducers: {
     copy_filter_select_techniqueExercises(state, action) {
       let { filteredExercises } = action.payload;
-      const { material, muscle, meters } = action.payload;
+      const { material, muscle, meters, level } = action.payload;
       const techniqueExercises = [];
       const max = 3;
       const min = 1;
       let numberExercises;
       do {
         numberExercises = randomIntFromInterval(min, max);
-        console.log('trying')
-      } while(meters/numberExercises<25);
-      console.log('before or after trying???', meters/numberExercises, meters, numberExercises)
+      } while (meters / numberExercises < 25);
+      // corner case for level 1 (we dont have many exercises in the list)
+      if (level == 1) {
+        if (filteredExercises.length <= 4) {
+          numberExercises = 1;
+        }
+        if (filteredExercises.length > 4 && filteredExercises.length < 10) {
+          if (meters / 3 >= 25) {
+            numberExercises = 3;
+          } else if (meters / 2 >= 25) {
+            numberExercises = 2;
+          } else {
+            numberExercises = 1;
+          }
+        }
+      }
       let pendingExercises = numberExercises;
       filteredExercises = filteredExercises.filter((ex) =>
         ex.block.includes("technique")
@@ -43,11 +56,12 @@ export const techniqueReducer = createSlice({
           let arrayToSelectFrom = exs_material.filter((ex) =>
             ex.material.includes(techniqueTool)
           );
-          if (arrayToSelectFrom.length > 0 && counter < 3 && pendingExercises>0) {
-            let selected =
-              arrayToSelectFrom[
-                Math.floor(Math.random() * arrayToSelectFrom.length)
-              ];
+          if (
+            arrayToSelectFrom.length > 0 &&
+            counter < 3 &&
+            pendingExercises > 0
+          ) {
+            let selected = randomValue(arrayToSelectFrom);
             let index = exs_material.indexOf(selected);
             // make sure it is not repeated in the block by removing the exercise from filteredExercises, and from the exs_material list
             let index2 = filteredExercises.findIndex(
@@ -73,10 +87,9 @@ export const techniqueReducer = createSlice({
           ex.muscle.some((part) => muscle.includes(part))
         );
         for (let i = 0; i < n_muscle; i++) {
-          if (pendingExercises > 0) {
+          if (pendingExercises > 0 && exs_muscle.length > 0) {
             // push random exercise with that muscle
-            let selected =
-              exs_muscle[Math.floor(Math.random() * exs_muscle.length)];
+            let selected = randomValue(exs_muscle);
             let index = exs_muscle.indexOf(selected);
             let index2 = filteredExercises.findIndex(
               (el) => el.name == selected.name
@@ -97,7 +110,7 @@ export const techniqueReducer = createSlice({
       // following loop won't run if pendingExercises=0
       for (let i = 0; i < pendingExercises; i++) {
         // select random exercise
-        let selected = exs_left[Math.floor(Math.random() * exs_left.length)];
+        let selected = randomValue(exs_left);
         let index = exs_left.indexOf(selected);
         exs_left.splice(index, 1);
         if (selected) {
