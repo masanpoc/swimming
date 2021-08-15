@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 import Wrapper from "./Wrapper";
 import { Provider } from "react-redux";
@@ -7,8 +7,11 @@ import store from "../store";
 const App = () => {
   // generated will be a state.generate value in Store, not a Hook
   // const [generated] = useState(false)
-
-  return (
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(()=>{setLoading(false)}, 1000);
+  }, [])
+  return (loading ? (null) : (
     <Provider store={store}>
       <div className="p-0 m-0 w-full text-center ">
         <header>
@@ -99,7 +102,7 @@ const App = () => {
         </footer>
       </div>
     </Provider>
-  );
+  ));
 };
 
 export default App;

@@ -15,7 +15,7 @@ const exercisesList = [
     name: "Freestyle kick",
     level: 1,
     stroke: "freestyle",
-    block: ["main", "technique", "warmup", "cooldown"],
+    block: ["technique", "warmup", "cooldown"],
     muscle: ["legs"],
     material: ["kickboard"],
   },

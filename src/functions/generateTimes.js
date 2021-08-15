@@ -5,7 +5,7 @@ function randomValue(arr) {
 }
 
 function conditionalFormat(toFormat) {
-  if (toFormat > 55) {
+  if (toFormat > 59) {
     return formatPace(toFormat);
   } else {
     return toFormat + "s";
@@ -21,7 +21,7 @@ function selectAtTiming(pace, meters) {
   function generateByMeters(pace, meters) {
     let atTiming;
     if (meters == 50) {
-      atTiming = pace / 2;
+      atTiming = round5(pace/2);
     }
     if (meters == 100) {
       atTiming = pace;
@@ -30,7 +30,7 @@ function selectAtTiming(pace, meters) {
       atTiming = pace * 2;
     }
     let toAdd = randomValue(intervals[meters]);
-    // there was a back related to types so we are making sure both are nums when adding (apparently pace is string)
+    // there was a bug related to types so we are making sure both are nums when adding (apparently pace is string)
     atTiming = Number(atTiming) + Number(toAdd);
     // console.log(atTiming, 'atTiming', pace, meters, intervals[meters], toAdd)
     return atTiming;
@@ -47,8 +47,8 @@ function selectOnLessTiming(pace, meters) {
   const intervals = {
     50: [[round5(pace / 2), " resting 15s"]],
     100: [
-      [Number(pace), " resting 15s"],
-      [Number(pace + 5), " resting 20s"],
+      [pace, " resting 15s"],
+      [pace + 5, " resting 20s"],
     ],
     200: [
       [pace * 2 + 10, " resting 40s"],
@@ -94,11 +94,11 @@ export default function generateTimes(pace, meters, style) {
     // two types of timing: 'on less than 1:20 resting 20s' || 'at 1:40' (50% probability)
     if (Math.random() > 0.5) {
       // timing on less than
-      let timing = "on less than " + selectOnLessTiming(pace, meters);
+      let timing = "on less than " + selectOnLessTiming(Number(pace), meters);
       return timing;
     } else {
       // timing at
-      let timing = "at " + conditionalFormat(selectAtTiming(pace, meters));
+      let timing = "at " + conditionalFormat(selectAtTiming(Number(pace), meters));
 
       // console.log('generated timing', timing, 'before formatting: ', selectAtTiming(pace, meters));
       return timing;

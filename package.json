@@ -8,6 +8,7 @@
     "production": "webpack serve --open --env mode=production",
     "format": "prettier --write .",
     "build": "webpack --config webpack.config.js --env mode=development",
+    "build-production": "webpack --config webpack.config.js --env mode=production",
     "test": "jest --verbose"
   },
   "repository": {
