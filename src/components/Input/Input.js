@@ -42,6 +42,7 @@ const Input = () => {
     5: false,
   });
   const [showMessage, setShowMessage] = useState(false);
+  const [validation, setValidation] = useState(0);
   const display = useSelector((state) => state.display);
   let paceTime = formatPace(pace);
 
@@ -169,6 +170,11 @@ const Input = () => {
     e.preventDefault();
     if (strokes.length < 1) {
       setShowMessage(true);
+      setValidation(1);
+    }
+    else if(strokes.length<2 && level<5 && strokes.includes('butterfly')) {
+      setShowMessage(true);
+      setValidation(2);
     } else {
       setShowMessage(false);
       dispatch(displayHide({ form: false, training: true, buttons: true }));
@@ -330,11 +336,12 @@ const Input = () => {
             {/* {_.divide(_.subtract(meters, 407.89), 36.84)} */}
           </div>
         </div>
-        <div className="flex flex-col space-y-16 w-full border-2 border-lighter-grey border-opacity-40 pt-4 pb-5 px-4">
-          <h3 className="text-left">Set your 100m freestyle pace:</h3>
+        <div className="flex flex-col space-y-4 w-full border-2 border-lighter-grey border-opacity-40 pt-4  pb-5 px-4">
+          <div className='flex flex-col space-y-16 pb-5'>
+          <h3 className="text-left">Set your 100m freestyle aerobic pace:</h3>
           <div className="relative w-8/12 flex flex-col justify-center">
             <input
-              type="range"
+              type="range" 
               min="70"
               max="150"
               step="5"
@@ -356,6 +363,25 @@ const Input = () => {
               {paceTime}
             </output>
           </div>
+          </div>
+          
+          <div className='flex flex-col text-left space-y-8'>
+              <h2>You can simply select a pace that you consider easy to moderate swimming.</h2>
+              <h2>Or...</h2>
+              <div className='flex flex-col space-y-7'>
+                
+                <h2><i>How to calculate your aerobic pace?</i></h2>
+                <ul className="list-decimal list-inside flex flex-col gap-4 pb-4 text-left">
+                  <li>Swim 100 meters freestyle.</li>
+                  <li>Check your time and check your pulse for 10 seconds.</li>
+                  <li>If you reached 12-18 beats per 10 seconds, that is your aerobic pace. If not, try again with a different swimming pace.</li>
+                </ul>
+              </div>
+              
+              
+          </div>
+            
+          
         </div>
         <div className="flex flex-col w-full space-y-4 border-2 border-lighter-grey border-opacity-40 py-4 px-4 ">
           <h3 className="text-left ">Strokes for this workout:</h3>
@@ -467,8 +493,12 @@ const Input = () => {
         />
       </form>
 
-      <div className={`${showMessage ? "" : "hidden"}`}>
-        <h2 style={{'backgroundColor': '#FFDDDC'}}>Please select at least one stroke</h2>
+      <div className={`mt-10 flex justify-center items-center space-x-4 ${showMessage ? "" : "hidden"}`}  style={{'backgroundColor': '#FFDDDC'}}>
+        <svg style={{width:"24px", height:"24px"}} viewBox="0 0 24 24">
+            <path fill="currentColor" d="M9 22C8.4 22 8 21.6 8 21V18H4C2.9 18 2 17.1 2 16V4C2 2.9 2.9 2 4 2H20C21.1 2 22 2.9 22 4V16C22 17.1 21.1 18 20 18H13.9L10.2 21.7C10 21.9 9.8 22 9.5 22H9M13 11V5H11V11M13 15V13H11V15H13Z" />
+        </svg>
+        <h2 className={`text-left py-3 ${validation==1 ? "" : "hidden"}`}>Please select at least one stroke</h2>
+        <h2 className={`text-left w-7/12 py-3 ${validation==2 ? "" : "hidden"}`}>Please select one more stroke (in addition to butterfly)</h2>
       </div>
 
       <div
