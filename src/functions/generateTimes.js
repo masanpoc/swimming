@@ -21,7 +21,7 @@ function selectAtTiming(pace, meters) {
   function generateByMeters(pace, meters) {
     let atTiming;
     if (meters == 50) {
-      atTiming = round5(pace/2);
+      atTiming = round5(pace / 2);
     }
     if (meters == 100) {
       atTiming = pace;
@@ -98,7 +98,8 @@ export default function generateTimes(pace, meters, style) {
       return timing;
     } else {
       // timing at
-      let timing = "at " + conditionalFormat(selectAtTiming(Number(pace), meters));
+      let timing =
+        "at " + conditionalFormat(selectAtTiming(Number(pace), meters));
 
       // console.log('generated timing', timing, 'before formatting: ', selectAtTiming(pace, meters));
       return timing;

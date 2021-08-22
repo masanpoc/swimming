@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 import Wrapper from "./Wrapper";
 import { Provider } from "react-redux";
@@ -9,9 +9,11 @@ const App = () => {
   // const [generated] = useState(false)
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setTimeout(()=>{setLoading(false)}, 1000);
-  }, [])
-  return (loading ? (null) : (
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+  return loading ? null : (
     <Provider store={store}>
       <div className="p-0 m-0 w-full text-center ">
         <header>
@@ -102,7 +104,7 @@ const App = () => {
         </footer>
       </div>
     </Provider>
-  ));
+  );
 };
 
 export default App;
