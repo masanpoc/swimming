@@ -4,9 +4,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env) => {
-  return {
+  const config =  {
     mode: env.mode,
     entry: path.resolve(__dirname, "src", "index.js"),
     output: {
@@ -20,7 +21,6 @@ module.exports = (env) => {
       port: 9000,
       hot: true,
     },
-    devtool: "inline-source-map",
     module: {
       rules: [
         {
@@ -79,4 +79,11 @@ module.exports = (env) => {
       ],
     },
   };
+  if(env.mode=='development'){
+    config.devtool="inline-source-map"
+  }
+  if(env.mode=='production'){
+    config.plugins.push(new BundleAnalyzerPlugin());
+  }
+  return config
 };
